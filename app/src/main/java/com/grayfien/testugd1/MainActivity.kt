@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var inputUsername: TextInputLayout
     private lateinit var inputPassword: TextInputLayout
+    private lateinit var inputNama: TextInputLayout
+    private lateinit var inputEmail: TextInputLayout
     private lateinit var mainLayout: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,8 +55,8 @@ class MainActivity : AppCompatActivity() {
 
             if(username == "admin" && password == "0603") checkLogin =true
             if(!checkLogin) return@OnClickListener
-            val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
-            startActivity(moveHome)
+            //val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
+            //startActivity(moveHome)
         })
 
         btnRegister.setOnClickListener (View.OnClickListener {

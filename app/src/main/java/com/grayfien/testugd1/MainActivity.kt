@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         mainLayout = findViewById(R.id.mainLayout)
         val btnClear: Button = findViewById(R.id.btnClear)
         val btnLogin: Button = findViewById(R.id.btnLogin)
-        val btnRegister: Button = findViewById(R.id.btnRegister)
+        val btnRegister: Button = findViewById(R.id.btnDaftar)
 
 
         btnClear.setOnClickListener {
@@ -51,10 +51,10 @@ class MainActivity : AppCompatActivity() {
                 checkLogin = false
             }
 
-            if(username == "admin" && password == "0603") checkLogin =true
+            if(username == "admin" && password == "test1") checkLogin =true
             if(!checkLogin) return@OnClickListener
-            val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
-            startActivity(moveHome)
+            //val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
+            //startActivity(moveHome)
         })
 
         btnRegister.setOnClickListener (View.OnClickListener {

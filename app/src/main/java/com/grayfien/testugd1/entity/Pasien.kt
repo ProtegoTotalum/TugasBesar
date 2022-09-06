@@ -25,7 +25,7 @@ class Pasien(
                 "Pria"
             ),
             Pasien(
-                "Tukiyem",
+                "Tukiyemc",
                 "tuki88",
                 "tercantikdidunia",
                 "tukiyembeauty@gmail.com",

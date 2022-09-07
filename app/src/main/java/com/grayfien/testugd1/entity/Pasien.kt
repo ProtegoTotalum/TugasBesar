@@ -7,8 +7,8 @@ class Pasien(
     var username: String,
     var password: String,
     var email: String,
-    var tglLahir: LocalDate,
-    var noTelp: Long,
+    var tglLahir: String,
+    var noTelp: String,
 ) {
 
     companion object{
@@ -19,24 +19,24 @@ class Pasien(
                 "sukmadi_ganteng",
                 "ganteng",
                 "sukmadi_keren@gmail.com",
-                LocalDate.parse("1986-12-25"),
-                6281265586542
+               "1986-12-25",
+                "6281265586542"
             ),
             Pasien(
                 "Tukiyemc",
                 "tuki88",
                 "tercantikdidunia",
                 "tukiyembeauty@gmail.com",
-                LocalDate.parse("1975-06-25"),
-                6286654453212
+                "1975-06-25",
+                "6286654453212"
             ),
             Pasien(
                 "Tresno",
                 "tresno_cool",
                 "sopokoe",
                 "tresnoiu@hotmail.com",
-                LocalDate.parse("1992-09-13"),
-                62652331255642
+                "1992-09-13",
+                "62652331255642"
 
             ),
             Pasien(
@@ -44,8 +44,8 @@ class Pasien(
                 "putput84",
                 "hehehe",
                 "putput99@ymail.com",
-                LocalDate.parse("1995-03-14"),
-                6285541411293
+                "1995-03-14",
+                "6285541411293"
 
             ),
             Pasien(
@@ -53,8 +53,8 @@ class Pasien(
                 "bobohondut",
                 "makanmakan",
                 "boboho88@gmail.com",
-                LocalDate.parse("1998-08-30"),
-                62889465212352
+                "1998-08-30",
+                "62889465212352"
 
             ),
             Pasien(
@@ -62,8 +62,8 @@ class Pasien(
                 "tralala",
                 "lalalili22",
                 "tralali@yahoo.com",
-                LocalDate.parse("1987-02-29"),
-                628599451223
+                "1987-02-29",
+                "628599451223"
 
             ),
             Pasien(
@@ -71,8 +71,8 @@ class Pasien(
                 "blabla123",
                 "bobobo",
                 "blabla33@gmail.com",
-                LocalDate.parse("1965-09-28"),
-                689956422312
+                "1965-09-28",
+                "689956422312"
 
             ),
             Pasien(
@@ -80,8 +80,8 @@ class Pasien(
                 "prius_895",
                 "toyota_prius",
                 "prius_mobil3@ymail.com",
-                LocalDate.parse("1974-11-12"),
-                6289556423345
+                "1974-11-12",
+                "6289556423345"
 
             ),
             Pasien(
@@ -89,16 +89,16 @@ class Pasien(
                 "inul_daratista@gmail.com",
                 "dangdut",
                 "inul_d45@gmail.com",
-                LocalDate.parse("1985-08-14"),
-                628556455123
+                "1985-08-14",
+                "628556455123"
             ),
             Pasien(
                 "Wiro Sableng",
                 "wiro_sableng",
                 "pendekar99",
                 "pendekar@gmail.com",
-                LocalDate.parse("1600-12-12"),
-                6289556455231
+                "1600-12-12",
+                "6289556455231"
             )
         )
     }

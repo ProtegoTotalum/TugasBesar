@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() {
 
             if(username == "admin" && password == "test1") checkLogin =true
             if(!checkLogin) return@OnClickListener
-            //val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
-            //startActivity(moveHome)
+            val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
+            startActivity(moveHome)
         })
 
         btnRegister.setOnClickListener (View.OnClickListener {

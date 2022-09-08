@@ -21,13 +21,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/layNama"
             android:hint="Nama"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputNama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/inputNama"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -37,12 +38,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:id="@+id/layEmail"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/inputEmail"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -52,12 +54,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="dd/mm/yyyy"
+            android:id="@+id/layTanggalLahir"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputTanggalLahir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/inputTanggalLahir"
                 android:inputType="date" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -67,12 +70,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="No. Telp"
+            android:id="@+id/layTelp"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputTelp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/inputTelp"
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -82,12 +86,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
+            android:id="@+id/layUsername"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/inputUsername"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -97,12 +102,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:id="@+id/layPassword"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/inputPassword"
                 android:inputType="textWebPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>

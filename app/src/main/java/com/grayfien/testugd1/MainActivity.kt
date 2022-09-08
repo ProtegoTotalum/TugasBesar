@@ -14,11 +14,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var inputUsername: TextInputLayout
     private lateinit var inputPassword: TextInputLayout
     private lateinit var mainLayout: ConstraintLayout
+    lateinit var mBundle: Bundle
+    lateinit var vUsername : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        getBundle()
 
         inputUsername = findViewById(R.id.inputLayoutUsername)
         inputPassword = findViewById(R.id.inputLayoutPassword)
@@ -26,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         val btnClear: Button = findViewById(R.id.btnClear)
         val btnLogin: Button = findViewById(R.id.btnLogin)
         val btnRegister: Button = findViewById(R.id.btnDaftar)
-
 
         btnClear.setOnClickListener {
             inputUsername.getEditText()?.setText("")
@@ -61,5 +63,13 @@ class MainActivity : AppCompatActivity() {
             val moveRegister = Intent(this@MainActivity, RegisterActivity::class.java)
             startActivity(moveRegister)
         })
+    }
+
+    fun getBundle(){
+        val bundle: Bundle? = intent.extras
+        val name: String? = bundle?.getString("username")
+
+        inputUsername = findViewById(R.id.inputLayoutUsername)
+        inputUsername.getEditText()?.setText(name)
     }
 }

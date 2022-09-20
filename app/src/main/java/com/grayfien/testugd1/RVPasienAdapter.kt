@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.grayfien.testugd1.entity.Pasien
+import com.grayfien.testugd1.package_room.Pasien
 
 class RVPasienAdapter(private val data:Array<Pasien>) : RecyclerView.Adapter<RVPasienAdapter.viewHolder>() {
 

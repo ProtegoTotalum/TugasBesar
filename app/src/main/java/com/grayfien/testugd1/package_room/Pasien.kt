@@ -1,16 +1,22 @@
-package com.grayfien.testugd1.entity
+package com.grayfien.testugd1.package_room
 
-import java.time.LocalDate
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-class Pasien(
-    var name: String,
-    var username: String,
-    var password: String,
-    var email: String,
-    var tglLahir: String,
-    var noTelp: String,
-) {
 
+@Entity
+data class Pasien(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val name: String,
+    val username: String,
+    val password: String,
+    val email: String,
+    val tglLahir: String,
+    val noTelp: String
+)
+
+    /*
     companion object{
         @JvmField
         var listOfPasien = arrayOf(
@@ -101,6 +107,4 @@ class Pasien(
                 "6289556455231"
             )
         )
-    }
-
-}
+    }*/

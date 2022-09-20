@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.grayfien.testugd1.entity.Pasien
+import com.grayfien.testugd1.package_room.Pasien
 
 
 class FragmentPasien : Fragment() {
@@ -23,7 +23,7 @@ class FragmentPasien : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(context)
-        val adapter : RVPasienAdapter = RVPasienAdapter(Pasien.listOfPasien)
+        //val adapter : RVPasienAdapter = RVPasienAdapter(Pasien.listOfPasien)
 
         val rvPasien : RecyclerView = view.findViewById(R.id.rv_pasien)
 
@@ -31,7 +31,7 @@ class FragmentPasien : Fragment() {
 
         rvPasien.setHasFixedSize(true)
 
-        rvPasien.adapter = adapter
+        //rvPasien.adapter = adapter
     }
 
 }

@@ -29,8 +29,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var usernameInput: TextInputEditText
     private lateinit var passwordInput: TextInputEditText
     private lateinit var tanggalLahirInput: TextInputEditText
-
-    private lateinit var btnRegister: Button
+    
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var db: PasienDB

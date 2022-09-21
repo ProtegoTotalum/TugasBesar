@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.grayfien.testugd1.package_room.Pasien
 
-class RVPasienAdapter(private val data:Array<Pasien>) : RecyclerView.Adapter<RVPasienAdapter.viewHolder>() {
+class RVPasienAdapter(private val data:ArrayList<Pasien>) : RecyclerView.Adapter<RVPasienAdapter.viewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
         val  itemView = LayoutInflater.from(parent.context).inflate(R.layout.rv_pasien_adapter, parent, false)

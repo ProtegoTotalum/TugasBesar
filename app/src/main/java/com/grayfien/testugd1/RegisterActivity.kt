@@ -4,8 +4,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.room.Room
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.grayfien.testugd1.databinding.ActivityRegisterBinding
+import com.grayfien.testugd1.package_room.Pasien
+import com.grayfien.testugd1.package_room.PasienDB
+import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -21,14 +29,36 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var usernameInput: TextInputEditText
     private lateinit var passwordInput: TextInputEditText
     private lateinit var tanggalLahirInput: TextInputEditText
+    
 
-    private lateinit var btnRegister: Button
-
+    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var db: PasienDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
+        db = Room.databaseBuilder(applicationContext,PasienDB::class.java,"pasien-db").build()
+        binding.btnRegister.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                db.pasienDao().addPasien(
+                    Pasien(0, inputNama.text.toString(),
+                        inputUsername.text.toString(),
+                        inputPassword.text.toString(),
+                        inputEmail.text.toString(),
+                        inputTanggalLahir.text.toString(),
+                        inputTelp.text.toString())
+                )
+                finish()
+            }
+        }
+
+
+        // setContentView(R.layout.activity_register)
+
+        /*
         namaInput = findViewById(R.id.inputNama)
         emailInput = findViewById(R.id.inputEmail)
         noTelpInput = findViewById(R.id.inputTelp)
@@ -87,5 +117,9 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+         */
     }
 }
+
+

@@ -3,23 +3,34 @@ package com.grayfien.testugd1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import com.grayfien.testugd1.package_room.PasienDB
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var inputUsername: TextInputLayout
     private lateinit var inputPassword: TextInputLayout
     private lateinit var mainLayout: ConstraintLayout
+    private lateinit var db: PasienDB
+    private lateinit var shareP: Preference
     lateinit var mBundle: Bundle
     lateinit var vUsername : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        shareP = Preference(this)
+
 
         getBundle()
 
@@ -42,7 +53,11 @@ class MainActivity : AppCompatActivity() {
             var checkLogin = false
             val username: String =inputUsername.getEditText()?.getText().toString()
             val password: String =inputPassword.getEditText()?.getText().toString()
-
+            var checkUser :String
+            var checkPas : String
+            db = Room.databaseBuilder(applicationContext,PasienDB::class.java,"pasien-db").build()
+            var userId : Int = 0
+            var pasId : Int = 0
 
             if(username.isEmpty()){
                 inputUsername.setError("Username must be filled with text")
@@ -53,10 +68,29 @@ class MainActivity : AppCompatActivity() {
                 checkLogin = false
             }
 
-            if(username == "admin" && password == "test1") checkLogin =true
-            if(!checkLogin) return@OnClickListener
-            val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
-            startActivity(moveHome)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val pasien = db.pasienDao().getUser(username, password)
+
+                if(pasien == null){
+                    Log.d("MainActivity", "PASIEN TIDAK ADA ")
+                    withContext(Dispatchers.Main){
+                        inputUsername.setError("Username Tidak Sesuai !")
+                        inputPassword.setError("Password Tidak Sesuai !")
+                        checkLogin = false
+                    }
+                }else{
+                    Log.d("Login Activity", "PASIEN DITEMUKAN")
+                    withContext(Dispatchers.Main){
+                        val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
+                        startActivity(moveHome)
+                        checkLogin = true
+                        shareP.setUser(pasien)
+                    }
+                }
+            }
+
+
         })
 
         btnRegister.setOnClickListener (View.OnClickListener {

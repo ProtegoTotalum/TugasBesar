@@ -2,6 +2,7 @@ package com.grayfien.testugd1.package_room
 
 import androidx.room.*
 
+
 @Dao
 interface PasienDAO {
     @Insert
@@ -14,7 +15,12 @@ interface PasienDAO {
     suspend fun deletePasien(pasien: Pasien)
 
     @Query("SELECT *FROM pasien")
-    suspend fun getPasien() : List<Pasien>
+    suspend fun getAllPasien() : List<Pasien>
+
+
+    @Query("SELECT  *FROM pasien WHERE username=:user AND password=:pass")
+    suspend fun getUser(user: String, pass:String) : Pasien
+
 
     @Query("SELECT *FROM pasien where id =:pasien_id")
     suspend fun getPasien(pasien_id: Int) : List<Pasien>

@@ -31,5 +31,22 @@ abstract class PasienDB : RoomDatabase(){
                 PasienDB::class.java,
                 "Pasien.db"
             ).build()
+
+        fun getDatabase(context: Context): PasienDB{
+            val temp = instance
+            if (temp != null){
+                return  temp
+            }
+
+            synchronized(this){
+                val instance1 = Room.databaseBuilder(
+                    context.applicationContext,
+                    PasienDB::class.java,
+                    "users_database"
+                ).build()
+                instance = instance1
+                return instance1
+            }
+        }
     }
 }

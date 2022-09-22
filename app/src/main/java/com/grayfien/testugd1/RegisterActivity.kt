@@ -17,18 +17,7 @@ import kotlinx.coroutines.launch
 
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var vNama: TextInputLayout
-    private lateinit var vEmail: TextInputLayout
-    private lateinit var vNoTelp: TextInputLayout
-    private lateinit var vUsername: TextInputLayout
-    private lateinit var vPassword: TextInputLayout
-    private lateinit var vTglLahir: TextInputLayout
-    private lateinit var namaInput: TextInputEditText
-    private lateinit var emailInput: TextInputEditText
-    private lateinit var noTelpInput: TextInputEditText
-    private lateinit var usernameInput: TextInputEditText
-    private lateinit var passwordInput: TextInputEditText
-    private lateinit var tanggalLahirInput: TextInputEditText
+
     
 
     private lateinit var binding: ActivityRegisterBinding
@@ -54,6 +43,22 @@ class RegisterActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+        /*
+            private lateinit var vNama: TextInputLayout
+            private lateinit var vEmail: TextInputLayout
+            private lateinit var vNoTelp: TextInputLayout
+            private lateinit var vUsername: TextInputLayout
+            private lateinit var vPassword: TextInputLayout
+            private lateinit var vTglLahir: TextInputLayout
+            private lateinit var namaInput: TextInputEditText
+            private lateinit var emailInput: TextInputEditText
+            private lateinit var noTelpInput: TextInputEditText
+            private lateinit var usernameInput: TextInputEditText
+            private lateinit var passwordInput: TextInputEditText
+            private lateinit var tanggalLahirInput: TextInputEditText
+
+         */
 
 
         // setContentView(R.layout.activity_register)

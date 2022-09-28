@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
-
+    tools:context=".EditActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -36,39 +34,39 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-<!--&lt;!&ndash;        <com.google.android.material.textfield.TextInputLayout&ndash;&gt;-->
-<!--&lt;!&ndash;            android:id="@+id/tampilUsername"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:hint="Username"&ndash;&gt;-->
-<!--&lt;!&ndash;            app:errorEnabled="true"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_marginBottom="8dp">&ndash;&gt;-->
+<!--        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tampilUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="Username"
+            app:errorEnabled="true"
+            android:layout_marginBottom="8dp">
 
-<!--&lt;!&ndash;            <com.google.android.material.textfield.TextInputEditText&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/editUsername"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:inputType="text"/>&ndash;&gt;-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editUsername"
+                android:inputType="text"/>
 
-<!--&lt;!&ndash;        </com.google.android.material.textfield.TextInputLayout>&ndash;&gt;-->
+        </com.google.android.material.textfield.TextInputLayout>
 
-<!--&lt;!&ndash;        <com.google.android.material.textfield.TextInputLayout&ndash;&gt;-->
-<!--&lt;!&ndash;            android:id="@+id/tampilPas"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:hint="Password"&ndash;&gt;-->
-<!--&lt;!&ndash;            app:errorEnabled="true"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_marginBottom="8dp">&ndash;&gt;-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tampilPas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="Password"
+            app:errorEnabled="true"
+            android:layout_marginBottom="8dp">
 
-<!--&lt;!&ndash;            <com.google.android.material.textfield.TextInputEditText&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/editPas"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:inputType="textVisiblePassword"/>&ndash;&gt;-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editPas"
+                android:inputType="textVisiblePassword"/>
 
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
+        </com.google.android.material.textfield.TextInputLayout>-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tampilEmail"
@@ -132,4 +130,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

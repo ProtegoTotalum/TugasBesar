@@ -24,4 +24,6 @@ class Preference (var context: Context?) {
         var json = Gson().fromJson(pref?.getString("pasien",""), Pasien::class.java)
         return json
     }
+
+
 }

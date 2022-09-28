@@ -113,6 +113,12 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <EditText
+            android:id="@+id/et_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="halo"
+            android:hint="Message"/>
     </LinearLayout>
 
     <Button
@@ -136,5 +142,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,107 +5,55 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.room.Room
-import com.grayfien.testugd1.databinding.FragmentUserBinding
-import com.grayfien.testugd1.package_room.PasienDB
-import android.content.Context
-import com.grayfien.testugd1.package_room.Pasien
-import kotlinx.android.synthetic.main.fragment_user.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import com.google.android.material.textfield.TextInputEditText
 
-class FragmentUser : Fragment(R.layout.fragment_user) {
-    private var binding1 : FragmentUserBinding? = null
-    private val binding get() = binding1!!
-    private var pasienId: Int = 0
-    private val edit : EditActivity? = null
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
+/**
+ * A simple [Fragment] subclass.
+ * Use the [ProfileFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class ProfileFragment : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
 
-    private lateinit var db: PasienDB
-    private lateinit var shareP: Preference
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-
-        binding1 = FragmentUserBinding.inflate(inflater, container, false)
-
-        val rootView: View = inflater.inflate(R.layout.fragment_user, container, false)
-
-        shareP = Preference(requireContext())
-        db = PasienDB.getDatabase(requireContext())
-
-        val nama = shareP.getUser()?.name
-        val email = shareP.getUser()?.email
-        val tglLahir = shareP.getUser()?.tglLahir
-        val noTelp = shareP.getUser()?.noTelp
-
-
-        binding.editNama.setText(nama)
-        binding.editEmail.setText(email)
-        binding.editTglLahir.setText(tglLahir)
-        binding.editNoTelp.setText(noTelp)
-
-       /* binding.btnUpdate.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                db.pasienDao().updatePasien(pasienId,
-                editNama.text.toString(),
-                editEmail.text.toString(),
-                editTglLahir.text.toString(),
-                editNoTelp.text.toString())
-            }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
         }
-
-        fun getPasien(){
-            CoroutineScope(Dispatchers.IO).launch {
-                val notes = db.pasienDao().getPasienID()
-                editNama.setText("")
-                editEmail.setText("")
-                editTglLahir.setText("")
-                editNoTelp.setText("")
-            }
-        }
-        */
-
-    /*
-        binding.btnUpdate.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                val id = shareP.getUser()?.id
-                val nama = binding.tampilNama.getEditText()?.getText().toString()
-                val username = binding.tampilUsername.getEditText()?.getText().toString()
-                val pass = binding.tampilPas.getEditText()?.getText().toString()
-                val email = binding.tampilEmail.getEditText()?.getText().toString()
-                val tglLahir = binding.tampilTglLahir.getEditText()?.getText().toString()
-                val noHP = binding.tampilNoTelp.getEditText()?.getText().toString()
-                db.pasienDao().updatePasien(id,nama,username,pass,email,tglLahir,noHP)
-                val userPasien = db.pasienDao().getPasienID(id)
-                shareP.setUser(user)
-
-
-
-                withContext(Dispatchers.Main){
-                    Toast.makeText(getActivity(), "Data berhasil di Edit", Toast.LENGTH_SHORT).show()
-                    binding.textNamaUser.setText(nama)
-                    binding.tietNamaLengkap.setText(nama)
-                    binding.tietTglLahir.setText(tglLahir)
-                    binding.tietNoHP.setText(noHP)
-                    binding.tietEmail.setText(email)
-                }
-
-     */
-
-
-
-        return binding.root
-
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_user, container, false)
+    }
 
-
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment ProfileFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            ProfileFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
 }

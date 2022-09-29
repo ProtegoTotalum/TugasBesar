@@ -143,13 +143,10 @@ class MainActivity : AppCompatActivity() {
         broadcastIntent.putExtra("toastMessage", inputUsername.getEditText()?.getText().toString())
         val actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val largeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_user_24)
-
         val builder = NotificationCompat.Builder(this, LOGIN_ID)
             .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
             .setContentTitle(getString(R.string.welcome_msg))
             .setContentText(inputUsername.getEditText()?.getText().toString())
-            .setLargeIcon(largeIcon)
             .setStyle(NotificationCompat.BigTextStyle()
                 .bigText(getString(R.string.long_dummy))
                 .setBigContentTitle("Halo!")

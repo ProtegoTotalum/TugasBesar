@@ -14,15 +14,10 @@ interface PasienDAO {
     @Delete
     suspend fun deletePasien(pasien: Pasien)
 
-    @Query("SELECT *FROM pasien")
-    suspend fun getAllPasien() : List<Pasien>
+    @Query("SELECT * FROM pasien")
+    suspend fun getPasiens(): List<Pasien>
 
-
-    @Query("SELECT  *FROM pasien WHERE username=:user AND password=:pass")
-    suspend fun getUser(user: String, pass:String) : Pasien
-
-
-    @Query("SELECT * FROM pasien where id =:pasien_id")
+    @Query("SELECT * FROM pasien WHERE id =:pasien_id")
     suspend fun getPasien(pasien_id: Int) : List<Pasien>
 
     @Query("SELECT *FROM pasien where id =:pasien_id")

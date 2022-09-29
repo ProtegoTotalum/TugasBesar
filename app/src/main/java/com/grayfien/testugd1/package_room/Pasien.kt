@@ -9,8 +9,6 @@ data class Pasien(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val name: String,
-    val username: String,
-    val password: String,
     val email: String,
     val tglLahir: String,
     val noTelp: String

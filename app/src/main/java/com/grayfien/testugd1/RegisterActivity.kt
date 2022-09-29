@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,8 @@ import com.google.android.material.textfield.TextInputLayout
 import com.grayfien.testugd1.databinding.ActivityRegisterBinding
 import com.grayfien.testugd1.package_room.Pasien
 import com.grayfien.testugd1.package_room.PasienDB
+import com.grayfien.testugd1.package_room.User
+import com.grayfien.testugd1.package_room.UserDB
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private val CHANNEL_ID_1 = "channel_notification_01"
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var db: PasienDB
+    private lateinit var db: UserDB
     private val notificationId1 = 105
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,11 +41,11 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(view)
         createNotificationChannel()
 
-        db = Room.databaseBuilder(applicationContext,PasienDB::class.java,"pasien-db").build()
+        db = Room.databaseBuilder(applicationContext,UserDB::class.java,"user-db").build()
         binding.btnRegister.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                db.pasienDao().addPasien(
-                    Pasien(0, inputNama.text.toString(),
+                db.userDao().addUser(
+                    User(0, inputNama.text.toString(),
                         inputUsername.text.toString(),
                         inputPassword.text.toString(),
                         inputEmail.text.toString(),
@@ -77,16 +80,21 @@ class RegisterActivity : AppCompatActivity() {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
-        val pendingIntent : PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        val pendingIntent : PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val broadcastIntent : Intent = Intent( this, NotificationReceiver::class.java)
-        broadcastIntent.putExtra("toastMessage", binding?.etMessage?.text.toString())
-        val actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        broadcastIntent.putExtra("toastMessage", "Selamat Anda Berhasil Register")
+        val actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID_1)
             .setSmallIcon(R.drawable.ic_baseline_notifications_24)
-            .setContentText(binding?.etMessage?.text.toString())
+            .setContentText("Selamat Anda Berhasil Register")
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
             .setColor(Color.YELLOW)
+            .setStyle(
+                NotificationCompat.BigPictureStyle()
+                    // Provide the bitmap to be used as the payload for the BigPicture notification.
+                    .bigPicture(BitmapFactory.decodeResource(resources,R.drawable.meds))
+            )
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .addAction(R.mipmap.ic_launcher, "Toast", actionIntent)

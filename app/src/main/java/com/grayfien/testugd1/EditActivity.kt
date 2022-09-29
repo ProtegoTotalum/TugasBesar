@@ -2,16 +2,11 @@ package com.grayfien.testugd1
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.grayfien.testugd1.package_room.Pasien
 import com.grayfien.testugd1.package_room.PasienDB
-import kotlinx.android.synthetic.main.activity_edit.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class EditActivity : AppCompatActivity() {
 
-    val db by lazy {PasienDB(this)}
+    val db by lazy { PasienDB(this) }
     private var pasienId: Int = 0
     var fragobj: FragmentPasien = FragmentPasien()
 

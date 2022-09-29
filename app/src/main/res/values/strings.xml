@@ -5,4 +5,7 @@
     <string name="ini_adalah_tab_home">Ini Adalah Tab Home</string>
     <string name="apotek_kita">Apotek Kita</string>
     <string name="kelompok_14">Kelompok 14</string>
+    <string name="welcome_msg">Selamat Datang!</string>
+    <string name="goodbye_msg">Anda telah keluar dari aplikasi</string>
+    <string name="long_dummy">Anda sudah berhasil masuk ke dalam aplikasi. Silahkan nikmati fitur yang ada.</string>
 </resources>

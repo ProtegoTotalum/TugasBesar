@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1046686724726",
+    "project_id": "test-ugd-1-c8741",
+    "storage_bucket": "test-ugd-1-c8741.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046686724726:android:a083344a6f4d3644c0e557",
+        "android_client_info": {
+          "package_name": "com.grayfien.testugd1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1046686724726-oo5enks4cg4h8p4b0idk7o7h49t3f0pq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdzWBmpD5H9BTsPyVjH6FbQvNfYyzdKio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1046686724726-oo5enks4cg4h8p4b0idk7o7h49t3f0pq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

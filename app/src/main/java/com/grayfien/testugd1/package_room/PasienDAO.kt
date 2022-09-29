@@ -26,5 +26,5 @@ interface PasienDAO {
     suspend fun getPasien(pasien_id: Int) : List<Pasien>
 
     @Query("SELECT *FROM pasien where id =:pasien_id")
-    suspend fun getPasienID(pasien_id: Int) : Pasien
+    suspend fun getPasienID(pasien_id: Int?) : Pasien
 }

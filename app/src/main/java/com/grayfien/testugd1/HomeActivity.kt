@@ -2,6 +2,7 @@ package com.grayfien.testugd1
 
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -16,7 +17,7 @@ class HomeActivity : AppCompatActivity() {
 
         val firstFragment=FragmentHome()
         val secondFragment=FragmentPasien()
-        val thirdFragment=FragmentUser()
+
 
         setCurrentFragment(firstFragment)
         val bottomNavigationView = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigationView)
@@ -25,7 +26,10 @@ class HomeActivity : AppCompatActivity() {
             when(item.itemId){
                 R.id.menuHome->setCurrentFragment(firstFragment)
                 R.id.menuPasien->setCurrentFragment(secondFragment)
-                R.id.menuProfil->setCurrentFragment(thirdFragment)
+                R.id.menuProfil->{
+                    val intent = Intent(this, UserActivity::class.java)
+                    startActivity(intent)
+                }
                 R.id.menuLogOut->{
                     val builder : AlertDialog.Builder = AlertDialog.Builder(this@HomeActivity)
                     builder.setMessage("Are you sure want to exit?")

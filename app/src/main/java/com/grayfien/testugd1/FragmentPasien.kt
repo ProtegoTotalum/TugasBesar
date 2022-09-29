@@ -29,8 +29,6 @@ class FragmentPasien : Fragment() {
     val db by lazy {PasienDB(requireActivity())}
     lateinit var pasienAdapter: RVPasienAdapter
 
-    val db by lazy { PasienDB(requireContext()) }
-    lateinit var pasienAdapter: RVPasienAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -106,80 +104,5 @@ class FragmentPasien : Fragment() {
             .putExtra("intent_id", pasienId)
             .putExtra("intent_type", intentType)
     )
-
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val layoutManager = LinearLayoutManager(context)
-        val adapter = RVPasienAdapter(arrayListOf(), object : RVPasienAdapter.
-
-        pasienAdapter = RVPasienAdapter(arrayListOf(), object : RVPasienAdapter.OnAdapterListener{
-            override fun onClick(pasien: Pasien) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onUpdate(pasien: Pasien) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onDelete(pasien: Pasien) {
-                TODO("Not yet implemented")
-            }
-        })
-
-        rv_pasien.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = pasienAdapter
-        }
-    }
-
-    fun intentEdit(pasienID : Int, intentType: Int){
-
-        startActivity(
-            Intent(activity, RegisterActivity::class.java)
-                .putExtra("intent_id", pasienID)
-                .putExtra("intent_type", intentType)
-        )
-
-    }
-
-
-        rvPasien.adapter = adapter
-    }*/
-    override fun onStart() {
-        super.onStart()
-        loadData()
-    }
-
-    //untuk load data yang tersimpan pada database yang sudah create data
-    fun loadData() { CoroutineScope(Dispatchers.IO).launch {
-
-        val pasiens = db?.pasienDao()?.getAllPasien()
-
-        Log.d("FragmentPasien","dbResponse: $pasiens")
-        withContext(Dispatchers.Main){
-//            if (pasiens != null) {
-            pasiens?.let { pasienAdapter.setData(it) }
-//            }
-//            else {
-//                Toast.makeText(requireContext(), "Data masih kosong", Toast.LENGTH_SHORT).show()
-//            }
-        }
-
-        }
-    }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        val layoutManager = LinearLayoutManager(context)
-//        //val adapter : RVPasienAdapter = RVPasienAdapter(Pasien.listOfPasien)
-//
-//        val rvPasien : RecyclerView = view.findViewById(R.id.rv_pasien)
-//
-//        rvPasien.layoutManager = layoutManager
-//
-//        rvPasien.setHasFixedSize(true)
-//
-//        //rvPasien.adapter = adapter
-//    }
 
 }

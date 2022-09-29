@@ -1,6 +1,8 @@
 package com.grayfien.testugd1
 
+
 import android.app.AlertDialog
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.grayfien.testugd1.R.layout.fragment_pasien
 import com.grayfien.testugd1.package_room.Constant
+
+
 import com.grayfien.testugd1.package_room.Pasien
 import com.grayfien.testugd1.package_room.PasienDB
 import kotlinx.android.synthetic.main.fragment_pasien.*
@@ -23,6 +27,9 @@ import kotlinx.coroutines.withContext
 
 class FragmentPasien : Fragment() {
     val db by lazy {PasienDB(requireActivity())}
+    lateinit var pasienAdapter: RVPasienAdapter
+
+    val db by lazy { PasienDB(requireContext()) }
     lateinit var pasienAdapter: RVPasienAdapter
 
     override fun onCreateView(
@@ -105,13 +112,74 @@ class FragmentPasien : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         val adapter = RVPasienAdapter(arrayListOf(), object : RVPasienAdapter.
 
-        val rvPasien : RecyclerView = view.findViewById(R.id.rv_pasien)
+        pasienAdapter = RVPasienAdapter(arrayListOf(), object : RVPasienAdapter.OnAdapterListener{
+            override fun onClick(pasien: Pasien) {
+                TODO("Not yet implemented")
+            }
 
-        rvPasien.layoutManager = layoutManager
+            override fun onUpdate(pasien: Pasien) {
+                TODO("Not yet implemented")
+            }
 
-        rvPasien.setHasFixedSize(true)
+            override fun onDelete(pasien: Pasien) {
+                TODO("Not yet implemented")
+            }
+        })
+
+        rv_pasien.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = pasienAdapter
+        }
+    }
+
+    fun intentEdit(pasienID : Int, intentType: Int){
+
+        startActivity(
+            Intent(activity, RegisterActivity::class.java)
+                .putExtra("intent_id", pasienID)
+                .putExtra("intent_type", intentType)
+        )
+
+    }
+
 
         rvPasien.adapter = adapter
     }*/
+    override fun onStart() {
+        super.onStart()
+        loadData()
+    }
+
+    //untuk load data yang tersimpan pada database yang sudah create data
+    fun loadData() { CoroutineScope(Dispatchers.IO).launch {
+
+        val pasiens = db?.pasienDao()?.getAllPasien()
+
+        Log.d("FragmentPasien","dbResponse: $pasiens")
+        withContext(Dispatchers.Main){
+//            if (pasiens != null) {
+            pasiens?.let { pasienAdapter.setData(it) }
+//            }
+//            else {
+//                Toast.makeText(requireContext(), "Data masih kosong", Toast.LENGTH_SHORT).show()
+//            }
+        }
+
+        }
+    }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        val layoutManager = LinearLayoutManager(context)
+//        //val adapter : RVPasienAdapter = RVPasienAdapter(Pasien.listOfPasien)
+//
+//        val rvPasien : RecyclerView = view.findViewById(R.id.rv_pasien)
+//
+//        rvPasien.layoutManager = layoutManager
+//
+//        rvPasien.setHasFixedSize(true)
+//
+//        //rvPasien.adapter = adapter
+//    }
 
 }

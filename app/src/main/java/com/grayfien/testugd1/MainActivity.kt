@@ -1,15 +1,26 @@
 package com.grayfien.testugd1
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import com.grayfien.testugd1.databinding.ActivityMainBinding
 import com.grayfien.testugd1.package_room.PasienDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,11 +37,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var mBundle: Bundle
     lateinit var vUsername : String
 
+    private val LOGIN_ID = "login"
+    private val loginId = 101
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         shareP = Preference(this)
 
+        createNotificationChannel()
 
         getBundle()
 
@@ -80,6 +95,7 @@ class MainActivity : AppCompatActivity() {
                         checkLogin = false
                     }
                 }else{
+                    sendNotificationLogin()
                     Log.d("Login Activity", "PASIEN DITEMUKAN")
                     withContext(Dispatchers.Main){
                         val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
@@ -97,6 +113,59 @@ class MainActivity : AppCompatActivity() {
             val moveRegister = Intent(this@MainActivity, RegisterActivity::class.java)
             startActivity(moveRegister)
         })
+    }
+
+    private fun createNotificationChannel() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Notification Title"
+            val descriptionText = "Notification Description"
+
+            val login = NotificationChannel(LOGIN_ID, name, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                description = descriptionText
+            }
+
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(login)
+        }
+
+    }
+
+    private fun sendNotificationLogin() {
+
+        val intent : Intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent : PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
+        val broadcastIntent : Intent = Intent(this, NotificationReceiver::class.java)
+        broadcastIntent.putExtra("toastMessage", inputUsername.getEditText()?.getText().toString())
+        val actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val largeIcon = BitmapFactory.decodeResource(resources, R.drawable.ic_user_24)
+
+        val builder = NotificationCompat.Builder(this, LOGIN_ID)
+            .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
+            .setContentTitle(getString(R.string.welcome_msg))
+            .setContentText(inputUsername.getEditText()?.getText().toString())
+            .setLargeIcon(largeIcon)
+            .setStyle(NotificationCompat.BigTextStyle()
+                .bigText(getString(R.string.long_dummy))
+                .setBigContentTitle("Halo!")
+                .setSummaryText(getString(R.string.apotek_kita)))
+            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+            .setColor(Color.BLUE)
+            .setAutoCancel(true)
+            .setOnlyAlertOnce(true)
+            .setContentIntent(pendingIntent)
+            .addAction(R.mipmap.ic_launcher, "Toast", actionIntent)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(loginId, builder.build())
+        }
+
     }
 
     fun getBundle(){

@@ -40,6 +40,7 @@ class FragmentPasien : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListener()
         setupRecyclerView()
     }
 
@@ -57,7 +58,7 @@ class FragmentPasien : Fragment() {
                 deleteDialog(pasien)
             }
         })
-        rv_pasien.apply {
+        list_pasien.apply {
             layoutManager = LinearLayoutManager(requireActivity().applicationContext)
             adapter = pasienAdapter
         }
@@ -87,20 +88,23 @@ class FragmentPasien : Fragment() {
     }
 
     fun loadData() {
-        if (::pasienAdapter.isInitialized) {
+        if(::pasienAdapter.isInitialized){
             CoroutineScope(Dispatchers.Default).launch {
-                val pasiens = db.pasienDao().getAllPasien()
+                val pasiens = db.pasienDao().getPasiens()
                 Log.d("FragmentPasien","dbResponse: $pasiens")
                 withContext(Dispatchers.Main){
                     pasienAdapter.setData(pasiens)
                 }
             }
         }
+    }
 
+    fun setupListener() {
+        button_create.setOnClickListener { intentEdit(0, Constant.TYPE_CREATE) }
     }
 
     fun intentEdit(pasienId : Int, intentType: Int) = startActivity(
-        Intent(requireActivity(), EditUserActivity::class.java)
+        Intent(requireActivity(), EditPasienActivity::class.java)
             .putExtra("intent_id", pasienId)
             .putExtra("intent_type", intentType)
     )

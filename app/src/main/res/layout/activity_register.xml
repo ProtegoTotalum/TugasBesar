@@ -113,12 +113,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/et_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="halo"
-            android:hint="Message"/>
+
     </LinearLayout>
 
     <Button

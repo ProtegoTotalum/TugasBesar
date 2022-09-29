@@ -22,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.grayfien.testugd1.databinding.ActivityMainBinding
 import com.grayfien.testugd1.package_room.PasienDB
+import com.grayfien.testugd1.package_room.UserDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var inputUsername: TextInputLayout
     private lateinit var inputPassword: TextInputLayout
     private lateinit var mainLayout: ConstraintLayout
-    private lateinit var db: PasienDB
+    private lateinit var db: UserDB
     private lateinit var shareP: Preference
     lateinit var mBundle: Bundle
     lateinit var vUsername : String
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             val password: String =inputPassword.getEditText()?.getText().toString()
             var checkUser :String
             var checkPas : String
-            db = Room.databaseBuilder(applicationContext,PasienDB::class.java,"pasien-db").build()
+            db = Room.databaseBuilder(applicationContext,UserDB::class.java,"user-db").build()
             var userId : Int = 0
             var pasId : Int = 0
 
@@ -85,10 +86,10 @@ class MainActivity : AppCompatActivity() {
 
 
             CoroutineScope(Dispatchers.IO).launch {
-                val pasien = db.pasienDao().getUser(username, password)
+                val user = db.userDao().getUser(username, password)
 
-                if(pasien == null){
-                    Log.d("MainActivity", "PASIEN TIDAK ADA ")
+                if(user == null){
+                    Log.d("MainActivity", "USER TIDAK ADA ")
                     withContext(Dispatchers.Main){
                         inputUsername.setError("Username Tidak Sesuai !")
                         inputPassword.setError("Password Tidak Sesuai !")
@@ -96,12 +97,12 @@ class MainActivity : AppCompatActivity() {
                     }
                 }else{
                     sendNotificationLogin()
-                    Log.d("Login Activity", "PASIEN DITEMUKAN")
+                    Log.d("Login Activity", "USER DITEMUKAN")
                     withContext(Dispatchers.Main){
                         val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
                         startActivity(moveHome)
                         checkLogin = true
-                        shareP.setUser(pasien)
+                        shareP.setUser(user)
                     }
                 }
             }
@@ -137,18 +138,18 @@ class MainActivity : AppCompatActivity() {
         val intent : Intent = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent : PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        val pendingIntent : PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
         val broadcastIntent : Intent = Intent(this, NotificationReceiver::class.java)
         broadcastIntent.putExtra("toastMessage", inputUsername.getEditText()?.getText().toString())
-        val actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
         val builder = NotificationCompat.Builder(this, LOGIN_ID)
             .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
             .setContentTitle(getString(R.string.welcome_msg))
             .setContentText(inputUsername.getEditText()?.getText().toString())
             .setStyle(NotificationCompat.BigTextStyle()
-                .bigText(getString(R.string.long_dummy))
+                .bigText("Selamat Anda telah berhasil masuk ke aplikasi Apotik Kita. Selamat menikmati fitur yang ada. Semoga sehat selalu :)")
                 .setBigContentTitle("Halo!")
                 .setSummaryText(getString(R.string.apotek_kita)))
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)

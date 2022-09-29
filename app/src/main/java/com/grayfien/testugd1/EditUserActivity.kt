@@ -11,6 +11,8 @@ import com.grayfien.testugd1.databinding.ActivityEditUserBinding
 import com.grayfien.testugd1.package_room.PasienDB
 import kotlinx.android.synthetic.main.activity_edit_user.*
 import com.grayfien.testugd1.package_room.Pasien
+import com.grayfien.testugd1.package_room.User
+import com.grayfien.testugd1.package_room.UserDB
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,10 +21,10 @@ import kotlinx.coroutines.launch
 class EditUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditUserBinding
     private lateinit var shareP: Preference
-    private lateinit var _currentUser: Pasien
+    private lateinit var _currentUser: User
     lateinit var sharedPreferences: SharedPreferences
-    private lateinit var db: PasienDB
-    private var pasienId: Int = 0
+    private lateinit var db: UserDB
+    private var userId: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +35,11 @@ class EditUserActivity : AppCompatActivity() {
         setContentView(view)
         shareP = Preference(this)
         sharedPreferences = getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE)
-        db = Room.databaseBuilder(applicationContext,PasienDB::class.java,"pasien-db").build()
+        db = Room.databaseBuilder(applicationContext,UserDB::class.java,"user-db").build()
 
 
 
-        val id = shareP.getUser()?.id.toString()
-        val pasienId = shareP.getUser()?.id
+        val id = shareP.getUser()?.id
         val nama = shareP.getUser()?.name
         val username = shareP.getUser()?.username
         val password = shareP.getUser()?.password
@@ -55,9 +56,9 @@ class EditUserActivity : AppCompatActivity() {
 
         binding!!.btnUpdate.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                val loggedUser : Pasien = db.pasienDao().getPasienID(pasienId)
-                db.pasienDao().updatePasien(
-                    Pasien(loggedUser.id,
+                val loggedUser : User = db.userDao().getUserID(id)
+                db.userDao().updateUser(
+                    User(loggedUser.id,
                         binding!!.editNama.text.toString(),
                         binding!!.editUsername.text.toString(),
                         loggedUser.password,
@@ -83,22 +84,20 @@ class EditUserActivity : AppCompatActivity() {
             edit_pas.setText("")
             edit_tglLahir.setText("")
             edit_noTelp.setText("")
-
-
         }
 
         setContentView(binding?.root)
     }
 
 
-    fun getPasien(){
-        pasienId = intent.getIntExtra("intent_id",0)
+/*    fun getUser(){
+        userId = intent.getIntExtra("intent_id",0)
         CoroutineScope(Dispatchers.IO).launch {
-            val pasien = db.pasienDao().getPasien(pasienId) [0]
-            edit_nama.setText(pasien.name)
-            edit_email.setText(pasien.email)
-            edit_tglLahir.setText(pasien.tglLahir)
-            edit_noTelp.setText(pasien.noTelp)
+            val user = db.userDao().getUser(userId) [0]
+            edit_nama.setText(user.name)
+            edit_email.setText(user.email)
+            edit_tglLahir.setText(user.tglLahir)
+            edit_noTelp.setText(user.noTelp)
         }
-    }
+    }*/
 }

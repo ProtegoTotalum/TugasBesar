@@ -4,22 +4,22 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.grayfien.testugd1.package_room.Pasien
-import kotlinx.android.synthetic.main.rv_pasien_adapter.view.*
+import kotlinx.android.synthetic.main.pasien_adapter.view.*
 
 
-class RVPasienAdapter(private val data:ArrayList<Pasien>, private val listener: OnAdapterListener) : RecyclerView.Adapter<RVPasienAdapter.viewHolder>() {
+class PasienAdapter(private val data:ArrayList<Pasien>, private val listener: OnAdapterListener) :
+    RecyclerView.Adapter<PasienAdapter.PasienViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-        return viewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.rv_pasien_adapter, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PasienViewHolder {
+        return PasienViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.pasien_adapter, parent, false)
         )
     }
 
 
-    override fun onBindViewHolder(holder: viewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PasienViewHolder, position: Int) {
         val currentItem = data[position]
         holder.view.tv_nama_pasien.text = currentItem.name
         holder.view.tv_nama_pasien.setOnClickListener {
@@ -35,7 +35,7 @@ class RVPasienAdapter(private val data:ArrayList<Pasien>, private val listener: 
 
     override fun getItemCount() = data.size
 
-    inner class viewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    inner class PasienViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(list: List<Pasien>){

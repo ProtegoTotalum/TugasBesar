@@ -23,14 +23,14 @@ class EditPasienActivity : AppCompatActivity() {
         setupView()
         setupListener()
 
-        //Toast.makeText(this,noteId.toString(),Toast.LENGTH_SHORT).show()
+
     }
     fun setupView(){
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val intentType = intent.getIntExtra("intent_type", 0)
         when (intentType){
                 Constant.TYPE_CREATE -> {
-                btnAdd.visibility = View.GONE
+                btnUpdate.visibility = View.GONE
             }
             Constant.TYPE_READ -> {
                 btnAdd.visibility = View.GONE
@@ -38,7 +38,7 @@ class EditPasienActivity : AppCompatActivity() {
                 getPasien()
             }
             Constant.TYPE_UPDATE -> {
-                btnUpdate.visibility = View.GONE
+                btnAdd.visibility = View.GONE
                 getPasien()
             }
         }

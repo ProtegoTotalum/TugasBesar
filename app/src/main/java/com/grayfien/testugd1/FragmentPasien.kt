@@ -2,7 +2,6 @@ package com.grayfien.testugd1
 
 
 import android.app.AlertDialog
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,14 +9,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.grayfien.testugd1.R.layout.fragment_pasien
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.grayfien.testugd1.databinding.FragmentPasienBinding
 import com.grayfien.testugd1.package_room.Constant
-
-
 import com.grayfien.testugd1.package_room.Pasien
 import com.grayfien.testugd1.package_room.PasienDB
+import kotlinx.android.synthetic.main.activity_pasien.*
 import kotlinx.android.synthetic.main.fragment_pasien.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,15 +24,14 @@ import kotlinx.coroutines.withContext
 
 
 class FragmentPasien : Fragment() {
-    val db by lazy {PasienDB(requireActivity())}
-    lateinit var pasienAdapter: RVPasienAdapter
-
+    val db by lazy { PasienDB(requireActivity()) }
+    lateinit var pasienAdapter: PasienAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(fragment_pasien, container, false)
     }
 
@@ -44,9 +41,10 @@ class FragmentPasien : Fragment() {
         setupRecyclerView()
     }
 
+
     private fun setupRecyclerView() {
-        pasienAdapter = RVPasienAdapter(arrayListOf(), object :
-            RVPasienAdapter.OnAdapterListener{
+        pasienAdapter = PasienAdapter(arrayListOf(), object :
+            PasienAdapter.OnAdapterListener{
             override fun onClick(pasien: Pasien) {
                 //Toast.makeText(applicationContext, memo.title, Toast.LENGTH_SHORT).show()
                 intentEdit(pasien.id, Constant.TYPE_READ)
@@ -58,7 +56,7 @@ class FragmentPasien : Fragment() {
                 deleteDialog(pasien)
             }
         })
-        list_pasien.apply {
+        list_pasien_fragment.apply {
             layoutManager = LinearLayoutManager(requireActivity().applicationContext)
             adapter = pasienAdapter
         }
@@ -88,11 +86,11 @@ class FragmentPasien : Fragment() {
     }
 
     fun loadData() {
-        if(::pasienAdapter.isInitialized){
-            CoroutineScope(Dispatchers.Default).launch {
+        if (::pasienAdapter.isInitialized) {
+            CoroutineScope(Dispatchers.IO).launch {
                 val pasiens = db.pasienDao().getPasiens()
-                Log.d("FragmentPasien","dbResponse: $pasiens")
-                withContext(Dispatchers.Main){
+                Log.d("MainActivity", "dbResponse: $pasiens")
+                withContext(Dispatchers.Main) {
                     pasienAdapter.setData(pasiens)
                 }
             }
@@ -100,13 +98,15 @@ class FragmentPasien : Fragment() {
     }
 
     fun setupListener() {
-        button_create.setOnClickListener { intentEdit(0, Constant.TYPE_CREATE) }
+        button_create_fragment.setOnClickListener { intentEdit(0, Constant.TYPE_CREATE) }
     }
 
-    fun intentEdit(pasienId : Int, intentType: Int) = startActivity(
-        Intent(requireActivity(), EditPasienActivity::class.java)
-            .putExtra("intent_id", pasienId)
-            .putExtra("intent_type", intentType)
-    )
+    fun intentEdit(pasienId : Int, intentType: Int) {
+        startActivity(
+            Intent(requireActivity(), EditPasienActivity::class.java)
+                .putExtra("intent_id", pasienId)
+                .putExtra("intent_type", intentType)
+        )
+    }
 
 }

@@ -20,6 +20,6 @@ interface PasienDAO {
     @Query("SELECT * FROM pasien WHERE id =:pasien_id")
     suspend fun getPasien(pasien_id: Int) : List<Pasien>
 
-    @Query("SELECT *FROM pasien where id =:pasien_id")
+    @Query("SELECT *FROM pasien where id=:pasien_id")
     suspend fun getPasienID(pasien_id: Int?) : Pasien
 }

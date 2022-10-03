@@ -1,10 +1,12 @@
 package com.grayfien.testugd1
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.room.Room
 import com.grayfien.testugd1.databinding.ActivityRegisterBinding
@@ -46,6 +48,7 @@ class UserActivity : AppCompatActivity() {
             val intent = Intent(this, EditUserActivity::class.java)
             startActivity(intent)
         }
+
 
 
 

@@ -58,6 +58,11 @@ class RegisterActivity : AppCompatActivity() {
 
         }
 
+        binding.btnCancelRegister.setOnClickListener {
+            val cancel = Intent(this, MainActivity::class.java)
+            startActivity(cancel)
+        }
+
     }
 
     private fun createNotificationChannel(){

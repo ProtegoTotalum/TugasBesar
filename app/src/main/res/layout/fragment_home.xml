@@ -6,11 +6,25 @@
     tools:context=".HomeActivity">
 
     <TextView
-
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
         style="@style/TextAppearance.MaterialComponents.Headline5"
         android:text="@string/ini_adalah_tab_home" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_baseline_location_on_24"
+            android:gravity="left" />
+
+    </LinearLayout>
 
 </FrameLayout>

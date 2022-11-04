@@ -42,7 +42,7 @@ class RegisterActivity : AppCompatActivity() {
         createNotificationChannel()
 
         db = Room.databaseBuilder(applicationContext,UserDB::class.java,"user-db").build()
-        binding.btnRegister.setOnClickListener {
+        binding!!.btnRegister.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 db.userDao().addUser(
                     User(0, inputNama.text.toString(),

@@ -66,7 +66,7 @@ class FragmentPasien : Fragment() {
         val alertDialog = AlertDialog.Builder(requireActivity())
         alertDialog.apply {
             setTitle("Confirmation")
-            setMessage("Are You Sure to delete this data From${pasien.name}?")
+            setMessage("Are You Sure to Delete This Data From ${pasien.name}?")
             setNegativeButton("Cancel") { dialogInterface, _ ->
                 dialogInterface.dismiss()
             }

@@ -40,6 +40,9 @@ android {
 
 dependencies {
 
+    //maps
+    implementation 'org.osmdroid:osmdroid-android:6.1.11'
+
     //GSON
     implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'com.google.firebase:firebase-messaging:23.0.8'

@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
         val thirdFragment=FragmentUser()
 
 
-        setCurrentFragment(thirdFragment)
+        setCurrentFragment(firstFragment)
 
 
         val bottomNavigationView = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigationView)

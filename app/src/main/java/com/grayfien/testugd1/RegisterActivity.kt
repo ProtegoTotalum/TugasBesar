@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(view)
         createNotificationChannel()
 
-        binding!!.btnRegister.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             val id = inputId.text.toString()
             val nama = inputNama.text.toString()
             val username = inputUsername.text.toString()
@@ -127,7 +127,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
                 override fun onFailure(call: Call<ResponseCreate>, t: Throwable) {
-
+                    Toast.makeText(applicationContext,"Gagal Register",Toast.LENGTH_LONG).show()
                 }
             })
         }

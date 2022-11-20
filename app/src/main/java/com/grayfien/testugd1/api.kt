@@ -24,7 +24,7 @@ interface api {
     ):Call<ResponseCreate>
 
     @FormUrlEncoded
-    @POST("akun")
+    @POST("login")
     fun login(
         @Field("username") username:String?,
         @Field("password") password:String?,

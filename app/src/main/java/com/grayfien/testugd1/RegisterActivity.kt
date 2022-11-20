@@ -11,6 +11,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.room.Room
@@ -25,13 +26,16 @@ import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class RegisterActivity : AppCompatActivity() {
 
     private val CHANNEL_ID_1 = "channel_notification_01"
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var db: UserDB
     private val notificationId1 = 105
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,21 +45,53 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(view)
         createNotificationChannel()
 
-        db = Room.databaseBuilder(applicationContext,UserDB::class.java,"user-db").build()
         binding!!.btnRegister.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                db.userDao().addUser(
-                    User(0, inputNama.text.toString(),
-                        inputUsername.text.toString(),
-                        inputPassword.text.toString(),
-                        inputEmail.text.toString(),
-                        inputTanggalLahir.text.toString(),
-                        inputTelp.text.toString())
-                )
-                finish()
-                sendNotification1()
+            val id = inputId.text.toString()
+            val nama = inputNama.text.toString()
+            val username = inputUsername.text.toString()
+            val password = inputPassword.text.toString()
+            val email = inputEmail.text.toString()
+            val tglLahir = inputTanggalLahir.text.toString()
+            val noTelp = inputTelp.text.toString()
+
+            if(id.isEmpty()){
+                inputId.error = "ID required"
+                inputId.requestFocus()
+                return@setOnClickListener
+            }
+            if(nama.isEmpty()){
+                inputNama.error = "Nama required"
+                inputNama.requestFocus()
+                return@setOnClickListener
+            }
+            if(email.isEmpty()){
+                inputEmail.error = "Email required"
+                inputEmail.requestFocus()
+                return@setOnClickListener
+            }
+            if(tglLahir.isEmpty()){
+                inputTanggalLahir.error = "Tanggal Lahir required"
+                inputTanggalLahir.requestFocus()
+                return@setOnClickListener
+            }
+            if(noTelp.isEmpty()){
+                inputTelp.error = "No Telp required"
+                inputTelp.requestFocus()
+                return@setOnClickListener
+            }
+            if(username.isEmpty()){
+                inputUsername.error = "Username required"
+                inputUsername.requestFocus()
+                return@setOnClickListener
+            }
+            if(password.isEmpty()){
+                inputPassword.error = "Password required"
+                inputPassword.requestFocus()
+                return@setOnClickListener
             }
 
+            saveData()
+            sendNotification1()
         }
 
         binding.btnCancelRegister.setOnClickListener {
@@ -63,6 +99,38 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(cancel)
         }
 
+    }
+
+    fun saveData(){
+        with(binding){
+            val id = inputId.text.toString()
+            val nama = inputNama.text.toString()
+            val username = inputUsername.text.toString()
+            val password = inputPassword.text.toString()
+            val email = inputEmail.text.toString()
+            val tglLahir = inputTanggalLahir.text.toString()
+            val noTelp = inputTelp.text.toString()
+
+
+            RClient.instances.createData(id, nama, username, password, email, tglLahir, noTelp).enqueue(object : Callback<ResponseCreate>{
+                override fun onResponse(
+                    call: Call<ResponseCreate>,
+                    response: Response<ResponseCreate>
+                ) {
+                    if(response.isSuccessful){
+                        Toast.makeText(applicationContext,"${response.body()?.pesan}",Toast.LENGTH_LONG).show()
+                        finish()
+                    }else{
+                        val jsonObj = JSONObject(response.errorBody()!!.charStream().readText())
+                        inputId.setError(jsonObj.getString("message"))
+                        Toast.makeText(applicationContext,"Maaf data sudah ada", Toast.LENGTH_LONG).show()
+                    }
+                }
+                override fun onFailure(call: Call<ResponseCreate>, t: Throwable) {
+
+                }
+            })
+        }
     }
 
     private fun createNotificationChannel(){

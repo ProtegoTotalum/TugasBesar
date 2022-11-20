@@ -7,26 +7,24 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
-import com.grayfien.testugd1.databinding.ActivityMainBinding
-import com.grayfien.testugd1.package_room.PasienDB
+import com.google.gson.Gson
+import org.json.JSONObject
 import com.grayfien.testugd1.package_room.UserDB
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainLayout: ConstraintLayout
     private lateinit var db: UserDB
     private lateinit var shareP: Preference
-    lateinit var mBundle: Bundle
+    private var b: Bundle? = null
     lateinit var vUsername : String
 
     private val LOGIN_ID = "login"
@@ -57,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         val btnLogin: Button = findViewById(R.id.btnLogin)
         val btnRegister: Button = findViewById(R.id.btnDaftar)
 
+
         btnClear.setOnClickListener {
             inputUsername.getEditText()?.setText("")
             inputPassword.getEditText()?.setText("")
@@ -65,15 +64,15 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
+
         btnLogin.setOnClickListener (View.OnClickListener {
             var checkLogin = false
             val username: String =inputUsername.getEditText()?.getText().toString()
             val password: String =inputPassword.getEditText()?.getText().toString()
             var checkUser :String
             var checkPas : String
-            db = Room.databaseBuilder(applicationContext,UserDB::class.java,"user-db").build()
-            var userId : Int = 0
-            var pasId : Int = 0
+
 
             if(username.isEmpty()){
                 inputUsername.setError("Username must be filled with text")
@@ -83,31 +82,7 @@ class MainActivity : AppCompatActivity() {
                 inputPassword.setError("Password must be filled with text")
                 checkLogin = false
             }
-
-
-            CoroutineScope(Dispatchers.IO).launch {
-                val user = db.userDao().getUser(username, password)
-
-                if(user == null){
-                    Log.d("MainActivity", "USER TIDAK ADA ")
-                    withContext(Dispatchers.Main){
-                        inputUsername.setError("Username Tidak Sesuai !")
-                        inputPassword.setError("Password Tidak Sesuai !")
-                        checkLogin = false
-                    }
-                }else{
-                    sendNotificationLogin()
-                    Log.d("Login Activity", "USER DITEMUKAN")
-                    withContext(Dispatchers.Main){
-                        val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
-                        startActivity(moveHome)
-                        checkLogin = true
-                        shareP.setUser(user)
-                    }
-                }
-            }
-
-
+            login()
         })
 
         btnRegister.setOnClickListener (View.OnClickListener {
@@ -115,6 +90,57 @@ class MainActivity : AppCompatActivity() {
             startActivity(moveRegister)
         })
     }
+
+    fun login(){
+        val username = input_username.text.toString().trim()
+        val password = input_password.text.toString().trim()
+
+        RClient.instances.login(username,password).enqueue(object :Callback<UserResponse>{
+            override fun onResponse(
+                call: Call<UserResponse>,
+                response: Response<UserResponse>
+            ) {
+                if(response.isSuccessful){
+                    val login  = response.body()!!
+
+
+                    Toast.makeText(this@MainActivity, "Login success!", Toast.LENGTH_SHORT).show()
+                    val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
+
+                    moveHome.putExtra("id_user",login.data?.id.toString())
+
+                    startActivity(moveHome)
+                }else{
+                    Toast.makeText(this@MainActivity, "Login failed!", Toast.LENGTH_LONG).show()
+                    Log.d("retro",response.toString())
+                }
+            }
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+            }
+        })
+    }
+
+    /*private fun Login(username: String, password: String){
+        //val loginInfo = LoginBody(username, password)
+        RClient.instances.userLogin(username,password).enqueue(object : Callback<ResponseDataUser>{
+            override fun onResponse(
+                call: Call<ResponseDataUser>,
+                response: Response<ResponseDataUser>
+            ) {
+                if(response.isSuccessful){
+                    Toast.makeText(this@MainActivity, "Login success!", Toast.LENGTH_SHORT).show()
+                    val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
+                    startActivity(moveHome)
+                }else{
+                    Toast.makeText(this@MainActivity, "Login failed!", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseDataUser>, t: Throwable) {
+            }
+
+        })
+    }*/
 
     private fun createNotificationChannel() {
 

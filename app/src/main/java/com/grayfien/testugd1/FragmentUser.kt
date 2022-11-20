@@ -1,59 +1,99 @@
 package com.grayfien.testugd1
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.content.Intent
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.grayfien.testugd1.dataClass.ResponseDataUser
+import com.grayfien.testugd1.dataClass.UserData
+import com.grayfien.testugd1.databinding.FragmentUserBinding
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_user.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+@Suppress("UNREACHABLE_CODE")
+class FragmentUser : Fragment(){
+    private var _binding: FragmentUserBinding? = null
+    private val binding get() = _binding!!
+    private var b:Bundle? = null
+    private val listUser = ArrayList<UserData>()
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user, container, false)
+
+        _binding = FragmentUserBinding.inflate(inflater, container, false)
+        return binding.root
+        getDataUser()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupListener()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        getDataUser()
+    }
+    private fun getDataUser(){
+        val bundle = arguments
+        val id = bundle?.getString("id")
+        Log.d("retrooo",id.toString())
+        RClient.instances.getData(id).enqueue(object : Callback<ResponseDataUser> {
+            override fun onResponse(
+                call:Call<ResponseDataUser>,
+                response: Response<ResponseDataUser>
+            ){
+                if(response.isSuccessful){
+                    response.body()?.let{
+                        listUser.addAll(it.data) }
+                    with(binding){
+                        editNama.setText(listUser[0].nama)
+                        editEmail.setText(listUser[0].email)
+                        editTglLahir.setText(listUser[0].tgLahir)
+                        editNoTelp.setText(listUser[0].noTelp)
+                    }
                 }
             }
+            override fun onFailure(call: Call<ResponseDataUser>, t: Throwable) {
+                val alertDialog = AlertDialog.Builder(requireActivity())
+                alertDialog.apply {
+                    setTitle("Confirmation")
+                    setMessage("Are You Sure to Delete This Data From ?")
+                    setNegativeButton("Cancel") { dialogInterface, _ ->
+                        dialogInterface.dismiss()
+                    }
+                    setPositiveButton("Delete") { dialogInterface, _ ->
+                        dialogInterface.dismiss()
+                    }
+                }
+                alertDialog.show()
+            }
+        })
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    fun setupListener() {
+        val bundle = arguments
+        val id = bundle?.getString("id")
+        btnUpdate.setOnClickListener { startActivity(
+            Intent(requireActivity(), EditUserActivity::class.java).apply { putExtra("id",id) })  }
     }
 }

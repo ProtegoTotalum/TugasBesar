@@ -1,18 +1,14 @@
 package com.grayfien.testugd1
 
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import com.grayfien.testugd1.fragment.FragmentHome
+import com.grayfien.testugd1.fragment.FragmentPasien
 
 
 class HomeActivity : AppCompatActivity() {
@@ -21,8 +17,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val firstFragment=FragmentHome()
-        val secondFragment=FragmentPasien()
+        val firstFragment= FragmentHome()
+        val secondFragment= FragmentPasien()
 
 
         setCurrentFragment(firstFragment)

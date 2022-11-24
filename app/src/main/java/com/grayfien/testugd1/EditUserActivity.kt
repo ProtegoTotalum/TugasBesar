@@ -40,10 +40,11 @@ class EditUserActivity : AppCompatActivity() {
         binding = ActivityEditUserBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        b = intent.extras
-        val id = b?.getString("id")
 
-        id?.let { getDetailData(it) }
+        //b = intent.extras
+        val id_user = intent.getStringExtra("id_user").toString()
+
+        id_user?.let {  getDetailData(it) }
 
         binding.btnUpdate.setOnClickListener {
             with(binding){
@@ -54,7 +55,7 @@ class EditUserActivity : AppCompatActivity() {
                 val tglLahir = editTglLahir.text.toString()
                 val noTelp = editNoTelp.text.toString()
 
-                RClient.instances.updateData(id, nama, username, password, email, tglLahir, noTelp).enqueue(object : Callback<ResponseCreate>{
+                RClient.instances.updateData(id_user, nama, username, password, email, tglLahir, noTelp).enqueue(object : Callback<ResponseCreate>{
                     override fun onResponse(
                         call: Call<ResponseCreate>,
                         response: Response<ResponseCreate>
@@ -70,7 +71,11 @@ class EditUserActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<ResponseCreate>, t: Throwable) {
-
+                        Toast.makeText(
+                            applicationContext,
+                            "Gagal",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 })
             }

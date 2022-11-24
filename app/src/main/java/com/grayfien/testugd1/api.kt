@@ -30,9 +30,6 @@ interface api {
         @Field("password") password:String?,
     ):Call<UserResponse>
 
-    @DELETE("akun/{id}")
-    fun deleteData(@Path("id")id:
-                   Int?):Call<ResponseCreate>
     @FormUrlEncoded
     @PUT("akun/{id}")
     fun updateData(

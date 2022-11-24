@@ -4,22 +4,20 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
-import com.google.gson.Gson
-import org.json.JSONObject
 import com.grayfien.testugd1.package_room.UserDB
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -105,9 +103,7 @@ class MainActivity : AppCompatActivity() {
 
 
                     Toast.makeText(this@MainActivity, "Login success!", Toast.LENGTH_SHORT).show()
-                    val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
-
-                    moveHome.putExtra("id_user",login.data?.id.toString())
+                    val moveHome = Intent(this@MainActivity, HomeActivity::class.java).apply {putExtra("id_user",login.data?.id)}
 
                     startActivity(moveHome)
                 }else{

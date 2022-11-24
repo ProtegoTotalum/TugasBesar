@@ -29,30 +29,36 @@ class FragmentUser : Fragment(){
     private val binding get() = _binding!!
     private var b:Bundle? = null
     private val listUser = ArrayList<UserData>()
+    private var id_user: String =""
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        val activity:HomeActivity? = activity as HomeActivity?
         _binding = FragmentUserBinding.inflate(inflater, container, false)
+        id_user = activity!!.getId().toString()
+
+        id_user?.let{ getDataUser(it)}
+
+        binding.btnUpdate.setOnClickListener {
+            val intent = Intent(requireActivity(), EditUserActivity::class.java)
+            intent.putExtra("id_user", id_user)
+            startActivity(intent)
+        }
+
+
         return binding.root
-        getDataUser()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupListener()
-    }
 
-    override fun onStart() {
-        super.onStart()
-        getDataUser()
-    }
-    private fun getDataUser(){
-        val bundle = arguments
-        val id = bundle?.getString("id")
-        Log.d("retrooo",id.toString())
+    private fun getDataUser(id:String){
+        val id_user = b?.getString("id")
+        id_user?.let{ getDataUser(it)}
+
+        Log.d("retrooo",id)
         RClient.instances.getData(id).enqueue(object : Callback<ResponseDataUser> {
             override fun onResponse(
                 call:Call<ResponseDataUser>,
@@ -88,12 +94,5 @@ class FragmentUser : Fragment(){
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun setupListener() {
-        val bundle = arguments
-        val id = bundle?.getString("id")
-        btnUpdate.setOnClickListener { startActivity(
-            Intent(requireActivity(), EditUserActivity::class.java).apply { putExtra("id",id) })  }
     }
 }

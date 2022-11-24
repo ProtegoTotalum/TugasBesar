@@ -46,6 +46,7 @@ class PasienActivity : AppCompatActivity() {
             EditPasienActivity::class.java).apply {
                 putExtra("id_pasien", id_pasien)
              })
+            intentEdit(0, Constant.TYPE_CREATE)
         }
 
         binding.txtCari.setOnKeyListener(View.OnKeyListener{ _, keyCode, event->
@@ -57,8 +58,8 @@ class PasienActivity : AppCompatActivity() {
             }
             false
         })
-        setupListener()
-        setupRecyclerView()
+//        setupListener()
+//        setupRecyclerView()
     }
 
     fun showDataFragment() {
@@ -96,23 +97,23 @@ class PasienActivity : AppCompatActivity() {
     }
 
 
-    private fun setupRecyclerView() {
-        pasienAdapter = PasienAdapter(listPasien, object : PasienAdapter.OnAdapterListener{
-            override fun onClick(pasien: PasienData) {
-                intentEdit(pasien.id, Constant.TYPE_READ)
-            }
-            override fun onUpdate(pasien: PasienData) {
-                intentEdit(pasien.id, Constant.TYPE_UPDATE)
-            }
-            override fun onDelete(pasien: PasienData) {
-                pasien.id?.let { it1 -> deleteData(it1) }
-            }
-        })
-        list_note.apply {
-            layoutManager = LinearLayoutManager(applicationContext)
-            adapter = pasienAdapter
-        }
-    }
+//    private fun setupRecyclerView() {
+//        pasienAdapter = PasienAdapter(listPasien, object : PasienAdapter.OnAdapterListener{
+//            override fun onClick(pasien: PasienData) {
+//                intentEdit(pasien.id, Constant.TYPE_READ)
+//            }
+//            override fun onUpdate(pasien: PasienData) {
+//                intentEdit(pasien.id, Constant.TYPE_UPDATE)
+//            }
+//            override fun onDelete(pasien: PasienData) {
+//                pasien.id?.let { it1 -> deleteData(it1) }
+//            }
+//        })
+//        list_note.apply {
+//            layoutManager = LinearLayoutManager(applicationContext)
+//            adapter = pasienAdapter
+//        }
+//    }
 
     override fun onStart() {
         super.onStart()
@@ -131,7 +132,7 @@ class PasienActivity : AppCompatActivity() {
                     dialog.dismiss()
     }
     val alert = builder.create()
-    alert.show()
+        alert.show()
 }
 
     private fun doDeleteData(id_pasien: Int) {
@@ -152,11 +153,6 @@ class PasienActivity : AppCompatActivity() {
         })
     }
 
-
-    fun setupListener() {
-        button_create.setOnClickListener { intentEdit(0, Constant.TYPE_CREATE) }
-    }
-
     fun intentEdit(pasienId : Int, intentType: Int) {
         startActivity(
             Intent(applicationContext, EditPasienActivity::class.java)
@@ -164,6 +160,13 @@ class PasienActivity : AppCompatActivity() {
                 .putExtra("intent_type", intentType)
         )
     }
+
+
+//    fun setupListener() {
+//        button_create.setOnClickListener { intentEdit(0, Constant.TYPE_CREATE) }
+//    }
+//
+
 
 
 //    fun loadData() {

@@ -3,22 +3,19 @@ package com.grayfien.testugd1.adapter
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.grayfien.testugd1.EditPasienActivity
 import com.grayfien.testugd1.PasienActivity
-import com.grayfien.testugd1.databinding.FragmentPasienBinding
 import com.grayfien.testugd1.databinding.PasienAdapterBinding
 import com.grayfien.testugd1.retrofit.PasienData
-import kotlinx.android.synthetic.main.pasien_adapter.*
-import kotlinx.android.synthetic.main.pasien_adapter.view.*
 
 
 class PasienAdapter(
-//    private val data:ArrayList<Pasien>,
+
     private val listPasien: ArrayList<PasienData>,
     private val context: Context,
-    private val listener: OnAdapterListener
+
     ) :
     RecyclerView.Adapter<PasienAdapter.PasienViewHolder>() {
 
@@ -31,6 +28,17 @@ class PasienAdapter(
                 cvData.setOnClickListener {
                     var i = Intent(context,
                         PasienActivity::class.java).apply {
+                        putExtra("id_pasien",pasienData.id)
+                        putExtra("nama_pasien",pasienData.nama_pasien)
+                    }
+                    context.startActivity(i)
+                }
+                iconDelete.setOnClickListener{
+                    (context as PasienActivity).deleteData(pasienData.id)
+                }
+                iconEdit.setOnClickListener{
+                    var i = Intent(context,
+                        EditPasienActivity::class.java).apply {
                         putExtra("id_pasien",pasienData.id)
                         putExtra("nama_pasien",pasienData.nama_pasien)
                     }
@@ -51,9 +59,8 @@ class PasienAdapter(
     }
 
 
-    override fun onBindViewHolder(holder: PasienViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PasienViewHolder, position: Int, ) {
 
-        val pasien = listPasien[position]
         holder.bind(listPasien[position])
 
 //        holder.view.tv_nama_pasien.setOnClickListener {
@@ -69,6 +76,8 @@ class PasienAdapter(
     }
 
     override fun getItemCount():Int = listPasien.size
+
+
 //
 //    @SuppressLint("NotifyDataSetChanged")
 //    fun setData(list: List<Pasien>){
@@ -77,10 +86,10 @@ class PasienAdapter(
 //        notifyDataSetChanged()
 //    }
 //
-    interface OnAdapterListener {
-        fun onClick(pasien: PasienData)
-        fun onUpdate(pasien: PasienData)
-        fun onDelete(pasien: PasienData)
-    }
+//    interface OnAdapterListener {
+//        fun onClick(pasien: PasienData)
+//        fun onUpdate(pasien: PasienData)
+//        fun onDelete(pasien: PasienData)
+//    }
 
 }

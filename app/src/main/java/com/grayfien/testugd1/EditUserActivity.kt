@@ -1,12 +1,16 @@
 package com.grayfien.testugd1
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
+import com.grayfien.testugd1.dataClass.ResponseDataUser
+import com.grayfien.testugd1.dataClass.UserData
 import com.grayfien.testugd1.databinding.ActivityEditUserBinding
 import com.grayfien.testugd1.package_room.PasienDB
 import kotlinx.android.synthetic.main.activity_edit_user.*
@@ -17,29 +21,116 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class EditUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditUserBinding
-    private lateinit var shareP: Preference
-    private lateinit var _currentUser: User
-    lateinit var sharedPreferences: SharedPreferences
-    private lateinit var db: UserDB
-    private var userId: Int = 0
+    private var b:Bundle? = null
+    private val listUser = ArrayList<UserData>()
+    //private lateinit var _currentUser: User
+    // lateinit var sharedPreferences: SharedPreferences
+    // private lateinit var shareP: Preference
 
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_user)
         binding = ActivityEditUserBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        shareP = Preference(this)
+
+        //b = intent.extras
+        val id_user = intent.getStringExtra("id_user").toString()
+
+        id_user?.let {  getDetailData(it) }
+
+        binding.btnUpdate.setOnClickListener {
+            with(binding){
+                val nama = editNama.text.toString()
+                val email = editEmail.text.toString()
+                val username = editUsername.text.toString()
+                val password = editPas.text.toString()
+                val tglLahir = editTglLahir.text.toString()
+                val noTelp = editNoTelp.text.toString()
+
+                RClient.instances.updateData(id_user, nama, username, password, email, tglLahir, noTelp).enqueue(object : Callback<ResponseCreate>{
+                    override fun onResponse(
+                        call: Call<ResponseCreate>,
+                        response: Response<ResponseCreate>
+                    ) {
+                        if(response.isSuccessful) {
+                            Toast.makeText(
+                                applicationContext,
+                                "${response.body()?.pesan}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            finish()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseCreate>, t: Throwable) {
+                        Toast.makeText(
+                            applicationContext,
+                            "Gagal",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
+            }
+        }
+
+        binding.btnCancel.setOnClickListener {
+            val cancel = Intent(this@EditUserActivity, FragmentUser::class.java)
+            startActivity(cancel)
+        }
+
+        binding.btnClear.setOnClickListener {
+            edit_nama.setText("")
+            edit_email.setText("")
+            edit_username.setText("")
+            edit_pas.setText("")
+            edit_tglLahir.setText("")
+            edit_noTelp.setText("")
+        }
+
+        setContentView(binding?.root)
+    }
+
+    fun getDetailData(id:String){
+        RClient.instances.getData(id).enqueue(object :Callback<ResponseDataUser>{
+            override fun onResponse(
+                call: Call<ResponseDataUser>,
+                response: Response<ResponseDataUser>
+            ) {
+                if (response.isSuccessful){
+                    response.body()?.let { listUser.addAll(it.data) }
+                    with(binding){
+                        editNama.setText(listUser[0].nama)
+                        editUsername.setText(listUser[0].username)
+                        editPas.setText(listUser[0].password)
+                        editEmail.setText(listUser[0].email)
+                        editTglLahir.setText(listUser[0].tgLahir)
+                        editNoTelp.setText(listUser[0].noTelp)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseDataUser>, t: Throwable) {
+
+            }
+        })
+    }
+
+
+    /*      shareP = Preference(this)
         sharedPreferences = getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE)
-        db = Room.databaseBuilder(applicationContext,UserDB::class.java,"user-db").build()
+        db = Room.databaseBuilder(applicationContext,UserDB::class.java,"user-db").build()*/
 
 
 
-        val id = shareP.getUser()?.id
+/*        val id = shareP.getUser()?.id
         val nama = shareP.getUser()?.name
         val username = shareP.getUser()?.username
         val password = shareP.getUser()?.password
@@ -70,34 +161,6 @@ class EditUserActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-        }
+        }*/
 
-        binding.btnCancel.setOnClickListener {
-            val cancel = Intent(this@EditUserActivity, UserActivity::class.java)
-            startActivity(cancel)
-        }
-
-        binding.btnClear.setOnClickListener {
-            edit_nama.setText("")
-            edit_email.setText("")
-            edit_username.setText("")
-            edit_pas.setText("")
-            edit_tglLahir.setText("")
-            edit_noTelp.setText("")
-        }
-
-        setContentView(binding?.root)
-    }
-
-
-/*    fun getUser(){
-        userId = intent.getIntExtra("intent_id",0)
-        CoroutineScope(Dispatchers.IO).launch {
-            val user = db.userDao().getUser(userId) [0]
-            edit_nama.setText(user.name)
-            edit_email.setText(user.email)
-            edit_tglLahir.setText(user.tglLahir)
-            edit_noTelp.setText(user.noTelp)
-        }
-    }*/
 }

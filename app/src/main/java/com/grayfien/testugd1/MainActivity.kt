@@ -19,6 +19,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.grayfien.testugd1.package_room.UserDB
+import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -102,12 +103,24 @@ class MainActivity : AppCompatActivity() {
                     val login  = response.body()!!
 
 
-                    Toast.makeText(this@MainActivity, "Login success!", Toast.LENGTH_SHORT).show()
+                    FancyToast.makeText(
+                        this@MainActivity,
+                        "Login success!",
+                        FancyToast.LENGTH_SHORT,
+                        FancyToast.SUCCESS,
+                        false
+                    ).show()
                     val moveHome = Intent(this@MainActivity, HomeActivity::class.java).apply {putExtra("id_user",login.data?.id)}
 
                     startActivity(moveHome)
                 }else{
-                    Toast.makeText(this@MainActivity, "Login failed!", Toast.LENGTH_LONG).show()
+                    FancyToast.makeText(
+                        this@MainActivity,
+                        "Login failed!",
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.ERROR,
+                        false
+                    ).show()
                     Log.d("retro",response.toString())
                 }
             }

@@ -94,7 +94,8 @@
             android:layout_weight="1"
             android:text="Clear Field" />
 
-        <com.google.android.material.button.MaterialButton
+        <com.dd.morphingbutton.MorphingButton
+            style="@style/Widget.MaterialComponents.Button"
             android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

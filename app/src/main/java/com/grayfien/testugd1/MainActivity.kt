@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Color.green
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.dd.morphingbutton.MorphingButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.grayfien.testugd1.package_room.UserDB
@@ -46,12 +48,11 @@ class MainActivity : AppCompatActivity() {
         createNotificationChannel()
 
         getBundle()
-
         inputUsername = findViewById(R.id.inputLayoutUsername)
         inputPassword = findViewById(R.id.inputLayoutPassword)
         mainLayout = findViewById(R.id.mainLayout)
         val btnClear: Button = findViewById(R.id.btnClear)
-        val btnLogin: Button = findViewById(R.id.btnLogin)
+        val btnLogin: MorphingButton = findViewById(R.id.btnLogin)
         val btnRegister: Button = findViewById(R.id.btnDaftar)
 
 
@@ -81,6 +82,17 @@ class MainActivity : AppCompatActivity() {
                 inputPassword.setError("Password must be filled with text")
                 checkLogin = false
             }
+
+            val circle = MorphingButton.Params.create()
+                .duration(500)
+                .cornerRadius(R.dimen.dimen_56) // 56 dp
+                .width(R.dimen.dimen_56) // 56 dp
+                .height(R.dimen.dimen_56) // 56 dp
+                .color(R.color.green) // normal state color
+                .colorPressed(R.color.green_dark) // pressed state color
+                .icon(R.drawable.ic_baseline_done_24) //icon
+            btnLogin.morph(circle)
+
             login()
         })
 
@@ -101,7 +113,6 @@ class MainActivity : AppCompatActivity() {
             ) {
                 if(response.isSuccessful){
                     val login  = response.body()!!
-
 
                     FancyToast.makeText(
                         this@MainActivity,

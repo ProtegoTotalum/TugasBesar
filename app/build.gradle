@@ -79,4 +79,8 @@ dependencies {
 
     //FancyToast
     implementation 'io.github.shashank02051997:FancyToast:2.0.2'
+
+    //Transitions
+    implementation 'com.andkulikov:transitionseverywhere:2.1.0'
+    implementation 'com.github.dmytrodanylyk:android-morphing-button:1.0'
 }

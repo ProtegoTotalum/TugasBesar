@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.room.Room
+import com.dd.morphingbutton.MorphingButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.grayfien.testugd1.databinding.ActivityRegisterBinding
@@ -45,6 +46,8 @@ class RegisterActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         createNotificationChannel()
+
+        val btnReg: MorphingButton = binding.btnRegister
 
         binding.btnRegister.setOnClickListener {
             val id = inputId.text.toString()
@@ -91,6 +94,15 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            val circle = MorphingButton.Params.create()
+                .duration(500)
+                .cornerRadius(R.dimen.dimen_56) // 56 dp
+                .width(R.dimen.dimen_56) // 56 dp
+                .height(R.dimen.dimen_56) // 56 dp
+                .color(R.color.green) // normal state color
+                .colorPressed(R.color.green_dark) // pressed state color
+                .icon(R.drawable.ic_baseline_done_24) //icon
+            btnReg.morph(circle)
             saveData()
             sendNotification1()
         }
@@ -113,12 +125,14 @@ class RegisterActivity : AppCompatActivity() {
             val noTelp = inputTelp.text.toString()
 
 
+
             RClient.instances.createData(id, nama, username, password, email, tglLahir, noTelp).enqueue(object : Callback<ResponseCreate>{
                 override fun onResponse(
                     call: Call<ResponseCreate>,
                     response: Response<ResponseCreate>
                 ) {
                     if(response.isSuccessful){
+
                         FancyToast.makeText(
                             applicationContext,
                             "${response.body()?.pesan}",

@@ -2,6 +2,7 @@ package com.grayfien.testugd1
 
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -32,7 +33,10 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
                 R.id.menuHome->setCurrentFragment(firstFragment)
-                R.id.menuPasien->setCurrentFragment(secondFragment)
+                R.id.menuPasien-> {
+                    val intent = Intent(this, PasienActivity::class.java)
+                    startActivity(intent)
+                }
                 R.id.menuProfil->setCurrentFragment(thirdFragment)
 /*              R.id.menuProfil->{
                     val intent = Intent(this, UserActivity::class.java)

@@ -33,6 +33,9 @@ class FragmentHome : Fragment() {
 
         btnQR.setOnClickListener { startActivity(
             Intent(requireActivity(), QrActivity::class.java)) }
+
+        btnPieChart.setOnClickListener { startActivity(
+            Intent(requireActivity(), PieChartActivity::class.java)) }
     }
 
 }

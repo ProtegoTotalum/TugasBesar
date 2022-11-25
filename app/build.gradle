@@ -77,6 +77,10 @@ dependencies {
     //QR Code Generate
     implementation 'com.google.mlkit:barcode-scanning:17.0.2'
 
+    //MP Chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     //FancyToast
     implementation 'io.github.shashank02051997:FancyToast:2.0.2'
+
 }

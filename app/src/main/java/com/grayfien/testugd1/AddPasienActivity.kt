@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.grayfien.testugd1.databinding.ActivityAddPasienBinding
+import com.shashank.sony.fancytoastlib.FancyToast
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,12 +37,24 @@ class AddPasienActivity : AppCompatActivity() {
                     response: Response<ResponseCreate>
                 ) {
                     if (response.isSuccessful){
-                        Toast.makeText(applicationContext, "${response.body()?.pesan}", Toast.LENGTH_LONG).show()
+                        FancyToast.makeText(
+                            applicationContext,
+                            "${response.body()?.pesan}",
+                            FancyToast.LENGTH_LONG,
+                            FancyToast.SUCCESS,
+                            false
+                        ).show()
                         finish()
                     }else{
                         val jsonObj = JSONObject(response.errorBody()!!.charStream().readText())
                         txtIdPasien.setError(jsonObj.getString("message"))
-                        Toast.makeText(applicationContext,"Maaf sudah ada data", Toast.LENGTH_LONG).show()
+                        FancyToast.makeText(
+                            applicationContext,
+                            "Maaf sudah ada data",
+                            FancyToast.LENGTH_LONG,
+                            FancyToast.ERROR,
+                            false
+                        ).show()
                     }
                 }
 

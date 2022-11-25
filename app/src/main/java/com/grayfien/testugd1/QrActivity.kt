@@ -21,6 +21,7 @@ import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 import com.grayfien.testugd1.databinding.ActivityQrBinding
+import com.shashank.sony.fancytoastlib.FancyToast
 
 class QrActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -145,7 +146,13 @@ class QrActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showToast(message: String){
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show()
+        FancyToast.makeText(
+            this,
+            message,
+            FancyToast.LENGTH_SHORT,
+            FancyToast.WARNING,
+            false
+        ).show()
     }
 
     private fun pickImageCamera(){

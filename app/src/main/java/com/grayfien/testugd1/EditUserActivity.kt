@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_edit_user.*
 import com.grayfien.testugd1.package_room.Pasien
 import com.grayfien.testugd1.package_room.User
 import com.grayfien.testugd1.package_room.UserDB
+import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -61,20 +62,24 @@ class EditUserActivity : AppCompatActivity() {
                         response: Response<ResponseCreate>
                     ) {
                         if(response.isSuccessful) {
-                            Toast.makeText(
+                            FancyToast.makeText(
                                 applicationContext,
                                 "${response.body()?.pesan}",
-                                Toast.LENGTH_LONG
+                                FancyToast.LENGTH_LONG,
+                                FancyToast.SUCCESS,
+                                false
                             ).show()
                             finish()
                         }
                     }
 
                     override fun onFailure(call: Call<ResponseCreate>, t: Throwable) {
-                        Toast.makeText(
+                        FancyToast.makeText(
                             applicationContext,
                             "Gagal",
-                            Toast.LENGTH_LONG
+                            FancyToast.LENGTH_LONG,
+                            FancyToast.ERROR,
+                            true
                         ).show()
                     }
                 })

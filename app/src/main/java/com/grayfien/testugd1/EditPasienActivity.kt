@@ -12,6 +12,7 @@ import com.grayfien.testugd1.databinding.ActivityEditPasienBinding
 import com.grayfien.testugd1.package_room.Constant
 import com.grayfien.testugd1.package_room.Pasien
 import com.grayfien.testugd1.package_room.PasienDB
+import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.android.synthetic.main.activity_edit_pasien.*
 import kotlinx.android.synthetic.main.fragment_pasien.*
 import kotlinx.coroutines.CoroutineScope
@@ -52,7 +53,13 @@ class EditPasienActivity : AppCompatActivity() {
                     Callback<ResponseCreate> {
                     override fun onResponse(call: Call<ResponseCreate>, response: Response<ResponseCreate>){
                         if (response.isSuccessful){
-                            Toast.makeText(applicationContext,"${response.body()?.pesan}", Toast.LENGTH_LONG).show()
+                            FancyToast.makeText(
+                                applicationContext,
+                                "${response.body()?.pesan}",
+                                FancyToast.LENGTH_LONG,
+                                FancyToast.SUCCESS,
+                                false
+                            ).show()
                             finish()
                         }
                     }

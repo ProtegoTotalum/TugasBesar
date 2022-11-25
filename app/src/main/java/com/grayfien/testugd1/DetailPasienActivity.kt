@@ -3,11 +3,11 @@ package com.grayfien.testugd1
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.grayfien.testugd1.dataClass.PasienData
 import com.grayfien.testugd1.dataClass.ResponseDataPasien
 import com.grayfien.testugd1.databinding.ActivityDetailPasienBinding
+import com.shashank.sony.fancytoastlib.FancyToast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -91,7 +91,13 @@ class DetailPasienActivity : AppCompatActivity() {
                 response: Response<ResponseCreate>
             ) {
                 if (response.isSuccessful){
-                    Toast.makeText(applicationContext, "Data berhasil dihapus", Toast.LENGTH_LONG).show()
+                    FancyToast.makeText(
+                        applicationContext,
+                        "Data berhasil dihapus",
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.SUCCESS,
+                        false
+                    ).show()
                     finish()
                 }
             }

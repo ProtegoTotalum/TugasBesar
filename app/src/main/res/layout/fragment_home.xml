@@ -26,6 +26,13 @@
             android:background="@drawable/ic_baseline_location_on_24"
             android:gravity="left" />
 
+        <ImageButton
+            android:id="@+id/btnQR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_baseline_qr_code_scanner"
+            android:gravity="left" />
+
     </LinearLayout>
 
 </FrameLayout>

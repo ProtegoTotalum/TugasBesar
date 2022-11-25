@@ -32,7 +32,19 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_baseline_qr_code_scanner"
             android:gravity="left" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal">
 
+        <ImageButton
+            android:id="@+id/btnPieChart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_baseline_pie_chart"
+            android:gravity="left" />
     </LinearLayout>
 
 </FrameLayout>

@@ -30,6 +30,9 @@ class FragmentHome : Fragment() {
     fun setupListener() {
         btnLocation.setOnClickListener { startActivity(
             Intent(requireActivity(), LocationActivity::class.java)) }
+
+        btnQR.setOnClickListener { startActivity(
+            Intent(requireActivity(), QrActivity::class.java)) }
     }
 
 }

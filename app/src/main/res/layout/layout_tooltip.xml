@@ -15,6 +15,7 @@
         app:cardCornerRadius="25dp"
         app:cardElevation="0dp"
         app:cardUseCompatPadding="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +38,8 @@
                     android:backgroundTint="@color/white"
                     android:padding="10dp"
                     android:src="@drawable/ic_baseline_location_on_24"
-                    app:tint="@android:color/holo_blue_light"/>
+                    app:tint="@android:color/holo_blue_light" />
+
                 <TextView
                     android:id="@+id/tvNamaLokasi"
                     android:layout_width="wrap_content"
@@ -50,7 +52,7 @@
                     android:singleLine="true"
                     android:text="Nama Jalan"
                     android:textColor="@color/white"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/imageClose"
@@ -62,7 +64,7 @@
                     android:backgroundTint="@color/white"
                     android:padding="10dp"
                     android:src="@drawable/ic_baseline_close_24"
-                    app:tint="@android:color/holo_blue_light"/>
+                    app:tint="@android:color/holo_blue_light" />
             </RelativeLayout>
 
             <LinearLayout
@@ -70,12 +72,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="10dp">
+
                 <TextView
                     android:id="@+id/tvAlamat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="OSM"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -88,5 +91,5 @@
         android:layout_marginTop="-22dp"
         android:rotation="90"
         android:src="@drawable/bg_triangle"
-        app:tint="@color/white"/>
+        app:tint="@color/white" />
 </RelativeLayout>

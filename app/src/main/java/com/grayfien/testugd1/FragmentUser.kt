@@ -1,35 +1,30 @@
 package com.grayfien.testugd1
 
 import android.app.AlertDialog
-import android.os.Bundle
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import com.grayfien.testugd1.dataClass.ResponseDataUser
 import com.grayfien.testugd1.dataClass.UserData
 import com.grayfien.testugd1.databinding.FragmentUserBinding
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_user.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 @Suppress("UNREACHABLE_CODE")
-class FragmentUser : Fragment(){
+class FragmentUser : Fragment() {
     private var _binding: FragmentUserBinding? = null
     private val binding get() = _binding!!
-    private var b:Bundle? = null
+    private var b: Bundle? = null
     private val listUser = ArrayList<UserData>()
-    private var id_user: String =""
+    private var id_user: String = ""
 
 
     override fun onCreateView(
@@ -37,11 +32,11 @@ class FragmentUser : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val activity:HomeActivity? = activity as HomeActivity?
+        val activity: HomeActivity? = activity as HomeActivity?
         _binding = FragmentUserBinding.inflate(inflater, container, false)
         id_user = activity!!.getId().toString()
 
-        id_user?.let{ getDataUser(it)}
+        id_user?.let { getDataUser(it) }
 
         binding.btnUpdate.setOnClickListener {
             val intent = Intent(requireActivity(), EditUserActivity::class.java)
@@ -54,20 +49,21 @@ class FragmentUser : Fragment(){
     }
 
 
-    private fun getDataUser(id:String){
+    private fun getDataUser(id: String) {
         val id_user = b?.getString("id")
-        id_user?.let{ getDataUser(it)}
+        id_user?.let { getDataUser(it) }
 
-        Log.d("retrooo",id)
+        Log.d("retrooo", id)
         RClient.instances.getData(id).enqueue(object : Callback<ResponseDataUser> {
             override fun onResponse(
-                call:Call<ResponseDataUser>,
+                call: Call<ResponseDataUser>,
                 response: Response<ResponseDataUser>
-            ){
-                if(response.isSuccessful){
-                    response.body()?.let{
-                        listUser.addAll(it.data) }
-                    with(binding){
+            ) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        listUser.addAll(it.data)
+                    }
+                    with(binding) {
                         editNama.setText(listUser[0].nama)
                         editEmail.setText(listUser[0].email)
                         editTglLahir.setText(listUser[0].tgLahir)
@@ -75,6 +71,7 @@ class FragmentUser : Fragment(){
                     }
                 }
             }
+
             override fun onFailure(call: Call<ResponseDataUser>, t: Throwable) {
                 val alertDialog = AlertDialog.Builder(requireActivity())
                 alertDialog.apply {
@@ -91,6 +88,7 @@ class FragmentUser : Fragment(){
             }
         })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

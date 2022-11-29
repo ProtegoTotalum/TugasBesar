@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db: UserDB
     private lateinit var shareP: Preference
     private var b: Bundle? = null
-    lateinit var vUsername : String
+    lateinit var vUsername: String
 
     private val LOGIN_ID = "login"
     private val loginId = 101
@@ -59,48 +59,46 @@ class MainActivity : AppCompatActivity() {
             inputUsername.getEditText()?.setText("")
             inputPassword.getEditText()?.setText("")
 
-            Snackbar.make(mainLayout,"Text Cleared Success", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(mainLayout, "Text Cleared Success", Snackbar.LENGTH_LONG).show()
         }
 
 
 
 
-        btnLogin.setOnClickListener (View.OnClickListener {
+        btnLogin.setOnClickListener(View.OnClickListener {
             var checkLogin = false
-            val username: String =inputUsername.getEditText()?.getText().toString()
-            val password: String =inputPassword.getEditText()?.getText().toString()
-            var checkUser :String
-            var checkPas : String
+            val username: String = inputUsername.getEditText()?.getText().toString()
+            val password: String = inputPassword.getEditText()?.getText().toString()
+            var checkUser: String
+            var checkPas: String
 
 
-            if(username.isEmpty()){
-                inputUsername.setError("Username must be filled with text")
-                checkLogin = false
+            if (username.isEmpty()) {
+                Toast.makeText(this@MainActivity, "Username tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+            }else if (password.isEmpty()) {
+                Toast.makeText(this@MainActivity, "Password tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+            }else{
+                login()
             }
-            if(password.isEmpty()){
-                inputPassword.setError("Password must be filled with text")
-                checkLogin = false
-            }
-            login()
         })
 
-        btnRegister.setOnClickListener (View.OnClickListener {
+        btnRegister.setOnClickListener(View.OnClickListener {
             val moveRegister = Intent(this@MainActivity, RegisterActivity::class.java)
             startActivity(moveRegister)
         })
     }
 
-    fun login(){
+    fun login() {
         val username = input_username.text.toString().trim()
         val password = input_password.text.toString().trim()
 
-        RClient.instances.login(username,password).enqueue(object :Callback<UserResponse>{
+        RClient.instances.login(username, password).enqueue(object : Callback<UserResponse> {
             override fun onResponse(
                 call: Call<UserResponse>,
                 response: Response<UserResponse>
             ) {
-                if(response.isSuccessful){
-                    val login  = response.body()!!
+                if (response.isSuccessful) {
+                    val login = response.body()!!
 
 
                     FancyToast.makeText(
@@ -110,10 +108,13 @@ class MainActivity : AppCompatActivity() {
                         FancyToast.SUCCESS,
                         false
                     ).show()
-                    val moveHome = Intent(this@MainActivity, HomeActivity::class.java).apply {putExtra("id_user",login.data?.id)}
-
+                    val moveHome = Intent(
+                        this@MainActivity,
+                        HomeActivity::class.java
+                    ).apply { putExtra("id_user", login.data?.id) }
                     startActivity(moveHome)
-                }else{
+                    sendNotificationLogin()
+                } else {
                     FancyToast.makeText(
                         this@MainActivity,
                         "Login failed!",
@@ -121,9 +122,10 @@ class MainActivity : AppCompatActivity() {
                         FancyToast.ERROR,
                         false
                     ).show()
-                    Log.d("retro",response.toString())
+                    Log.d("retro", response.toString())
                 }
             }
+
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
             }
         })
@@ -157,9 +159,10 @@ class MainActivity : AppCompatActivity() {
             val name = "Notification Title"
             val descriptionText = "Notification Description"
 
-            val login = NotificationChannel(LOGIN_ID, name, NotificationManager.IMPORTANCE_DEFAULT).apply {
-                description = descriptionText
-            }
+            val login =
+                NotificationChannel(LOGIN_ID, name, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                    description = descriptionText
+                }
 
             val notificationManager: NotificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -170,23 +173,35 @@ class MainActivity : AppCompatActivity() {
 
     private fun sendNotificationLogin() {
 
-        val intent : Intent = Intent(this, MainActivity::class.java).apply {
+        val intent: Intent = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent : PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
-        val broadcastIntent : Intent = Intent(this, NotificationReceiver::class.java)
+        val broadcastIntent: Intent = Intent(this, NotificationReceiver::class.java)
         broadcastIntent.putExtra("toastMessage", inputUsername.getEditText()?.getText().toString())
-        val actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        val actionIntent = PendingIntent.getBroadcast(
+            this,
+            0,
+            broadcastIntent,
+            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
         val builder = NotificationCompat.Builder(this, LOGIN_ID)
             .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
             .setContentTitle(getString(R.string.welcome_msg))
             .setContentText(inputUsername.getEditText()?.getText().toString())
-            .setStyle(NotificationCompat.BigTextStyle()
-                .bigText("Selamat Anda telah berhasil masuk ke aplikasi Apotik Kita. Selamat menikmati fitur yang ada. Semoga sehat selalu :)")
-                .setBigContentTitle("Halo!")
-                .setSummaryText(getString(R.string.apotek_kita)))
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText("Selamat Anda telah berhasil masuk ke aplikasi Apotik Kita. Selamat menikmati fitur yang ada. Semoga sehat selalu :)")
+                    .setBigContentTitle("Halo!")
+                    .setSummaryText(getString(R.string.apotek_kita))
+            )
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
             .setColor(Color.BLUE)
             .setAutoCancel(true)
@@ -201,7 +216,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getBundle(){
+    fun getBundle() {
         val bundle: Bundle? = intent.extras
         val name: String? = bundle?.getString("username")
 

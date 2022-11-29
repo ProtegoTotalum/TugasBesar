@@ -6,13 +6,12 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.barcode.BarcodeScanner
@@ -25,9 +24,9 @@ import com.shashank.sony.fancytoastlib.FancyToast
 
 class QrActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var binding : ActivityQrBinding
+    private lateinit var binding: ActivityQrBinding
 
-    companion object{
+    companion object {
         private const val CAMERA_REQUEST_CODE = 100
         private const val STORAGE_REQUEST_CODE = 101
 
@@ -37,7 +36,7 @@ class QrActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var cameraPermissions: Array<String>
     private lateinit var storagePermissions: Array<String>
 
-    private var imageUri : Uri? = null
+    private var imageUri: Uri? = null
 
     private var barcodeScannerOption: BarcodeScannerOptions? = null
     private var barcodeScanner: BarcodeScanner? = null
@@ -52,10 +51,14 @@ class QrActivity : AppCompatActivity(), View.OnClickListener {
         binding.galleryBtn.setOnClickListener(this)
         binding.scanBtn.setOnClickListener(this)
 
-        cameraPermissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        cameraPermissions = arrayOf(
+            android.Manifest.permission.CAMERA,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
         storagePermissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-        barcodeScannerOption = BarcodeScannerOptions.Builder().setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS).build()
+        barcodeScannerOption =
+            BarcodeScannerOptions.Builder().setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS).build()
         barcodeScanner = BarcodeScanning.getClient(barcodeScannerOption!!)
     }
 
@@ -85,27 +88,35 @@ class QrActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
-    private fun checkCameraPermissions(): Boolean{
-        val resultCamera = (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED)
-        val resultstorage = (ContextCompat.checkSelfPermission(this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+    private fun checkCameraPermissions(): Boolean {
+        val resultCamera =
+            (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED)
+        val resultstorage = (ContextCompat.checkSelfPermission(
+            this,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
                 == PackageManager.PERMISSION_GRANTED)
 
         return resultCamera && resultstorage
     }
 
-    private fun requestCameraPermission(){
+    private fun requestCameraPermission() {
 
         ActivityCompat.requestPermissions(this, cameraPermissions, CAMERA_REQUEST_CODE)
     }
 
-    private fun checkStoragePermission(): Boolean{
-        val result = (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    private fun checkStoragePermission(): Boolean {
+        val result = (ContextCompat.checkSelfPermission(
+            this,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
                 == PackageManager.PERMISSION_GRANTED)
         return result
     }
 
-    private fun requestStoragePermission(){
+    private fun requestStoragePermission() {
         ActivityCompat.requestPermissions(this, storagePermissions, STORAGE_REQUEST_CODE)
     }
 
@@ -116,27 +127,27 @@ class QrActivity : AppCompatActivity(), View.OnClickListener {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        when(requestCode){
+        when (requestCode) {
             CAMERA_REQUEST_CODE -> {
-                if(grantResults.isNotEmpty()){
+                if (grantResults.isNotEmpty()) {
                     val cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
                     val storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED
 
-                    if (cameraAccepted && storageAccepted){
+                    if (cameraAccepted && storageAccepted) {
                         pickImageCamera()
-                    }else{
+                    } else {
                         showToast("camera dan Storage permission are required")
                     }
                 }
             }
 
             STORAGE_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty()){
+                if (grantResults.isNotEmpty()) {
                     val storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
 
-                    if(storageAccepted){
+                    if (storageAccepted) {
                         pickImageGallery()
-                    }else{
+                    } else {
                         showToast("Storage are required..")
                     }
                 }
@@ -145,7 +156,7 @@ class QrActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun showToast(message: String){
+    private fun showToast(message: String) {
         FancyToast.makeText(
             this,
             message,
@@ -155,12 +166,13 @@ class QrActivity : AppCompatActivity(), View.OnClickListener {
         ).show()
     }
 
-    private fun pickImageCamera(){
+    private fun pickImageCamera() {
         val contentValues = ContentValues()
-        contentValues.put(MediaStore.Images.Media.TITLE,"Foto Sample")
+        contentValues.put(MediaStore.Images.Media.TITLE, "Foto Sample")
         contentValues.put(MediaStore.Images.Media.DESCRIPTION, "Deskripsi Foto Sample")
 
-        imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+        imageUri =
+            contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
 
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
@@ -179,7 +191,7 @@ class QrActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun pickImageGallery(){
+    private fun pickImageGallery() {
         val intent = Intent(Intent.ACTION_PICK)
 
         intent.type = "image/*"
@@ -188,31 +200,32 @@ class QrActivity : AppCompatActivity(), View.OnClickListener {
 
     private val gallerActivityResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ){ result ->
-        if (result.resultCode == Activity.RESULT_OK){
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
             val data = result.data
 
             imageUri = data!!.data
             Log.d(TAG, "galleryActivityResultLaumcher: imageUri: $imageUri")
 
             binding.imageTV.setImageURI(imageUri)
-        }else{
+        } else {
             showToast("Dibatalkan ....")
         }
 
     }
 
-    private fun detectResultFromImage(){
-        try{
+    private fun detectResultFromImage() {
+        try {
             val inputImage = InputImage.fromFilePath(this, imageUri!!)
 
-            val barcodeResult = barcodeScanner?.process(inputImage)?.addOnSuccessListener {
-                    barcodes -> extractbarcodeQrCodeInfo(barcodes)
-            }?.addOnFailureListener{
-                    e -> Log.d(TAG, "detectResultFromImage: ",e)
-                showToast("failed Scanning due to ${e.message}")
-            }
-        }catch (e:Exception){
+            val barcodeResult =
+                barcodeScanner?.process(inputImage)?.addOnSuccessListener { barcodes ->
+                    extractbarcodeQrCodeInfo(barcodes)
+                }?.addOnFailureListener { e ->
+                    Log.d(TAG, "detectResultFromImage: ", e)
+                    showToast("failed Scanning due to ${e.message}")
+                }
+        } catch (e: Exception) {
             Log.d(TAG, "detectResultFromImage:", e)
             showToast("Failed Due to ${e.message}")
         }
@@ -296,9 +309,10 @@ class QrActivity : AppCompatActivity(), View.OnClickListener {
                             "\nnama: $name " +
                             "\norganization: $organisasi " +
                             "\nPhone : $phone" + "\n\nrawValue : $rawValue"
-                }else -> {
-                binding.resultView.text = "rawValue: $rawValue"
-            }
+                }
+                else -> {
+                    binding.resultView.text = "rawValue: $rawValue"
+                }
             }
         }
     }

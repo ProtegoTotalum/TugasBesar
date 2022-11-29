@@ -2,13 +2,11 @@ package com.grayfien.testugd1
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_pasien.*
 
 class FragmentHome : Fragment() {
 
@@ -28,14 +26,23 @@ class FragmentHome : Fragment() {
     }
 
     fun setupListener() {
-        btnLocation.setOnClickListener { startActivity(
-            Intent(requireActivity(), LocationActivity::class.java)) }
+        btnLocation.setOnClickListener {
+            startActivity(
+                Intent(requireActivity(), LocationActivity::class.java)
+            )
+        }
 
-        btnQR.setOnClickListener { startActivity(
-            Intent(requireActivity(), QrActivity::class.java)) }
+        btnQR.setOnClickListener {
+            startActivity(
+                Intent(requireActivity(), QrActivity::class.java)
+            )
+        }
 
-        btnPieChart.setOnClickListener { startActivity(
-            Intent(requireActivity(), PieChartActivity::class.java)) }
+        btnPieChart.setOnClickListener {
+            startActivity(
+                Intent(requireActivity(), PieChartActivity::class.java)
+            )
+        }
     }
 
 }

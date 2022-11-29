@@ -8,7 +8,8 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import java.io.IOException
 
-class CameraView(context: Context?, private val mCamera: Camera) :SurfaceView(context), SurfaceHolder.Callback{
+class CameraView(context: Context?, private val mCamera: Camera) : SurfaceView(context),
+    SurfaceHolder.Callback {
     private val mHolder: SurfaceHolder
 
     init {
@@ -22,8 +23,8 @@ class CameraView(context: Context?, private val mCamera: Camera) :SurfaceView(co
         try {
             mCamera.setPreviewDisplay(mHolder)
             mCamera.startPreview()
-        }catch (e: IOException){
-            Log.d("error","Camera error on SurfaceCreated"+ e.message)
+        } catch (e: IOException) {
+            Log.d("error", "Camera error on SurfaceCreated" + e.message)
         }
     }
 
@@ -32,8 +33,8 @@ class CameraView(context: Context?, private val mCamera: Camera) :SurfaceView(co
         try {
             mCamera.setPreviewDisplay(mHolder)
             mCamera.startPreview()
-        }catch (e: IOException){
-            Log.d("Error","Camera error on SurfaceChanged"+ e.message)
+        } catch (e: IOException) {
+            Log.d("Error", "Camera error on SurfaceChanged" + e.message)
         }
     }
 

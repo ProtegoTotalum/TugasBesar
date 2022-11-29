@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 
 @Entity
-data class Obat (
+data class Obat(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val namaObat: String,

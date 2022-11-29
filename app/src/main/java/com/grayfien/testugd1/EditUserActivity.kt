@@ -1,34 +1,22 @@
 package com.grayfien.testugd1
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.room.Room
-import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
 import com.grayfien.testugd1.dataClass.ResponseDataUser
 import com.grayfien.testugd1.dataClass.UserData
 import com.grayfien.testugd1.databinding.ActivityEditUserBinding
-import com.grayfien.testugd1.package_room.PasienDB
-import kotlinx.android.synthetic.main.activity_edit_user.*
-import com.grayfien.testugd1.package_room.Pasien
-import com.grayfien.testugd1.package_room.User
-import com.grayfien.testugd1.package_room.UserDB
 import com.shashank.sony.fancytoastlib.FancyToast
+import kotlinx.android.synthetic.main.activity_edit_user.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class EditUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditUserBinding
-    private var b:Bundle? = null
+    private var b: Bundle? = null
     private val listUser = ArrayList<UserData>()
     //private lateinit var _currentUser: User
     // lateinit var sharedPreferences: SharedPreferences
@@ -45,10 +33,10 @@ class EditUserActivity : AppCompatActivity() {
         //b = intent.extras
         val id_user = intent.getStringExtra("id_user").toString()
 
-        id_user?.let {  getDetailData(it) }
+        id_user?.let { getDetailData(it) }
 
         binding.btnUpdate.setOnClickListener {
-            with(binding){
+            with(binding) {
                 val nama = editNama.text.toString()
                 val email = editEmail.text.toString()
                 val username = editUsername.text.toString()
@@ -56,12 +44,20 @@ class EditUserActivity : AppCompatActivity() {
                 val tglLahir = editTglLahir.text.toString()
                 val noTelp = editNoTelp.text.toString()
 
-                RClient.instances.updateData(id_user, nama, username, password, email, tglLahir, noTelp).enqueue(object : Callback<ResponseCreate>{
+                RClient.instances.updateData(
+                    id_user,
+                    nama,
+                    username,
+                    password,
+                    email,
+                    tglLahir,
+                    noTelp
+                ).enqueue(object : Callback<ResponseCreate> {
                     override fun onResponse(
                         call: Call<ResponseCreate>,
                         response: Response<ResponseCreate>
                     ) {
-                        if(response.isSuccessful) {
+                        if (response.isSuccessful) {
                             FancyToast.makeText(
                                 applicationContext,
                                 "${response.body()?.pesan}",
@@ -103,15 +99,15 @@ class EditUserActivity : AppCompatActivity() {
         setContentView(binding?.root)
     }
 
-    fun getDetailData(id:String){
-        RClient.instances.getData(id).enqueue(object :Callback<ResponseDataUser>{
+    fun getDetailData(id: String) {
+        RClient.instances.getData(id).enqueue(object : Callback<ResponseDataUser> {
             override fun onResponse(
                 call: Call<ResponseDataUser>,
                 response: Response<ResponseDataUser>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     response.body()?.let { listUser.addAll(it.data) }
-                    with(binding){
+                    with(binding) {
                         editNama.setText(listUser[0].nama)
                         editUsername.setText(listUser[0].username)
                         editPas.setText(listUser[0].password)
@@ -132,7 +128,6 @@ class EditUserActivity : AppCompatActivity() {
     /*      shareP = Preference(this)
         sharedPreferences = getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE)
         db = Room.databaseBuilder(applicationContext,UserDB::class.java,"user-db").build()*/
-
 
 
 /*        val id = shareP.getUser()?.id

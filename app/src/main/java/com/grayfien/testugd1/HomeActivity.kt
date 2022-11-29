@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 
 class HomeActivity : AppCompatActivity() {
 
-    private var id_user: String =""
+    private var id_user: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,33 +20,34 @@ class HomeActivity : AppCompatActivity() {
 
         id_user = intent.extras!!.getString("id_user").toString()
 
-        val firstFragment=FragmentHome()
-        val secondFragment=FragmentPasien()
-        val thirdFragment=FragmentUser()
+        val firstFragment = FragmentHome()
+        val secondFragment = FragmentPasien()
+        val thirdFragment = FragmentUser()
 
 
         setCurrentFragment(firstFragment)
 
 
-        val bottomNavigationView = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigationView)
+        val bottomNavigationView =
+            findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigationView)
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            when(item.itemId){
-                R.id.menuHome->setCurrentFragment(firstFragment)
-                R.id.menuPasien-> {
+            when (item.itemId) {
+                R.id.menuHome -> setCurrentFragment(firstFragment)
+                R.id.menuPasien -> {
                     val intent = Intent(this, PasienActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.menuProfil->setCurrentFragment(thirdFragment)
+                R.id.menuProfil -> setCurrentFragment(thirdFragment)
 /*              R.id.menuProfil->{
                     val intent = Intent(this, UserActivity::class.java)
                     startActivity(intent)
                 }*/
-                R.id.menuLogOut->{
-                    val builder : AlertDialog.Builder = AlertDialog.Builder(this@HomeActivity)
+                R.id.menuLogOut -> {
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(this@HomeActivity)
                     builder.setMessage("Are you sure want to exit?")
-                        .setPositiveButton("YES", object : DialogInterface.OnClickListener{
-                            override fun onClick(dialogInterface: DialogInterface, i:Int){
+                        .setPositiveButton("YES", object : DialogInterface.OnClickListener {
+                            override fun onClick(dialogInterface: DialogInterface, i: Int) {
 
                                 //Keluar dari aplikasi
                                 finishAndRemoveTask()
@@ -61,9 +62,9 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun setCurrentFragment(fragment:Fragment)=
+    private fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.layout_fragment,fragment)
+            replace(R.id.layout_fragment, fragment)
             commit()
         }
 

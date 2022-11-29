@@ -33,6 +33,7 @@
             android:background="@drawable/ic_baseline_qr_code_scanner"
             android:gravity="left" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

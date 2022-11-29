@@ -3,21 +3,21 @@
     <item
         android:id="@+id/menuHome"
         android:title="Home"
-        android:icon="@drawable/ic_home_24"/>
+        android:icon="@drawable/ic_home_24" />
 
     <item
         android:id="@+id/menuPasien"
         android:title="Pasien"
-        android:icon="@drawable/patient"/>
+        android:icon="@drawable/patient" />
 
     <item
         android:id="@+id/menuProfil"
         android:title="Profil"
-        android:icon="@drawable/ic_person_24"/>
+        android:icon="@drawable/ic_person_24" />
 
     <item
         android:id="@+id/menuLogOut"
         android:icon="@drawable/logout"
-        android:title="Log Out"/>
+        android:title="Log Out" />
 
 </menu>

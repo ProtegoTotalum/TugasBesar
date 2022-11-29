@@ -1,29 +1,18 @@
 package com.grayfien.testugd1
 
 
-import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import com.grayfien.testugd1.R.layout.fragment_pasien
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grayfien.testugd1.dataClass.PasienData
 import com.grayfien.testugd1.dataClass.ResponseDataPasien
 import com.grayfien.testugd1.databinding.FragmentPasienBinding
-import com.grayfien.testugd1.package_room.Constant
-import com.grayfien.testugd1.package_room.Pasien
-import com.grayfien.testugd1.package_room.PasienDB
 import kotlinx.android.synthetic.main.activity_pasien.*
 import kotlinx.android.synthetic.main.fragment_pasien.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,7 +28,7 @@ class FragmentPasien : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentPasienBinding.inflate(inflater, container,false)
+        _binding = FragmentPasienBinding.inflate(inflater, container, false)
         return binding.root
         getDataPasien()
     }
@@ -50,22 +39,23 @@ class FragmentPasien : Fragment() {
         getDataPasien()
     }
 
-    private fun getDataPasien(){
+    private fun getDataPasien() {
         binding.rvData.setHasFixedSize(true)
         binding.rvData.layoutManager = LinearLayoutManager(context)
         val bundle = arguments
         val cari = bundle?.getString("cari")
         binding.progressBar.visibility
-        RClient.instances.getDataPasien(cari).enqueue(object : Callback<ResponseDataPasien>{
+        RClient.instances.getDataPasien(cari).enqueue(object : Callback<ResponseDataPasien> {
             override fun onResponse(
                 call: Call<ResponseDataPasien>,
                 response: Response<ResponseDataPasien>
             ) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     listPasien.clear()
                     response.body()?.let {
-                        listPasien.addAll(it.data) }
-                    val adapter = PasienAdapter (listPasien, requireContext())
+                        listPasien.addAll(it.data)
+                    }
+                    val adapter = PasienAdapter(listPasien, requireContext())
                     binding.rvData.adapter = adapter
                     adapter.notifyDataSetChanged()
                     binding.progressBar.isVisible = false
@@ -77,6 +67,7 @@ class FragmentPasien : Fragment() {
             }
         })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

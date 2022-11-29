@@ -1,8 +1,7 @@
 package com.grayfien.testugd1
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.grayfien.testugd1.databinding.ActivityAddPasienBinding
 import com.shashank.sony.fancytoastlib.FancyToast
 import org.json.JSONObject
@@ -23,20 +22,26 @@ class AddPasienActivity : AppCompatActivity() {
         }
     }
 
-    fun saveData(){
-        with(binding){
+    fun saveData() {
+        with(binding) {
             val id_pasien = txtIdPasien.text.toString()
             val nama_pasien = txtNamaPasien.text.toString()
             val email_pasien = txtEmailPasien.text.toString()
             val tglLahir_pasien = txtTglLahirPasien.text.toString()
             val noTelp_pasien = txtNoTelpPasien.text.toString()
 
-            RClient.instances.createDataPasien(id_pasien,nama_pasien, email_pasien,tglLahir_pasien, noTelp_pasien).enqueue(object : Callback<ResponseCreate>{
+            RClient.instances.createDataPasien(
+                id_pasien,
+                nama_pasien,
+                email_pasien,
+                tglLahir_pasien,
+                noTelp_pasien
+            ).enqueue(object : Callback<ResponseCreate> {
                 override fun onResponse(
                     call: Call<ResponseCreate>,
                     response: Response<ResponseCreate>
                 ) {
-                    if (response.isSuccessful){
+                    if (response.isSuccessful) {
                         FancyToast.makeText(
                             applicationContext,
                             "${response.body()?.pesan}",
@@ -45,7 +50,7 @@ class AddPasienActivity : AppCompatActivity() {
                             false
                         ).show()
                         finish()
-                    }else{
+                    } else {
                         val jsonObj = JSONObject(response.errorBody()!!.charStream().readText())
                         txtIdPasien.setError(jsonObj.getString("message"))
                         FancyToast.makeText(

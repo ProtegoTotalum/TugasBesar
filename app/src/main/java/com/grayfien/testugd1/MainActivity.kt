@@ -74,9 +74,9 @@ class MainActivity : AppCompatActivity() {
 
 
             if (username.isEmpty()) {
-                Toast.makeText(this@MainActivity, "Username tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(this@MainActivity, "Username tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
             }else if (password.isEmpty()) {
-                Toast.makeText(this@MainActivity, "Password tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(this@MainActivity, "Password tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
             }else{
                 login()
             }

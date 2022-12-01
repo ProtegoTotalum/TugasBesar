@@ -45,19 +45,19 @@ class RegisterActivity : AppCompatActivity() {
             val noTelp = inputTelp.text.toString()
 
             if (id.isEmpty()) {
-                Toast.makeText(this@RegisterActivity, "ID tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(this@RegisterActivity, "ID tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
             } else if (nama.isEmpty()) {
-                    Toast.makeText(this@RegisterActivity, "Nama tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(this@RegisterActivity, "Nama tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
             } else if (email.isEmpty()) {
-                Toast.makeText(this@RegisterActivity, "Email tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(this@RegisterActivity, "Email tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
             } else if (tglLahir.isEmpty()) {
-                Toast.makeText(this@RegisterActivity, "Tanggal lahir tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(this@RegisterActivity, "Tanggal lahir tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
             } else if (noTelp.isEmpty()) {
-                Toast.makeText(this@RegisterActivity, "Nomor telepon tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(this@RegisterActivity, "Nomor telepon tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
             } else if (username.isEmpty()) {
-                Toast.makeText(this@RegisterActivity, "Username tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(this@RegisterActivity, "Username tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
             } else if (password.isEmpty()) {
-                Toast.makeText(this@RegisterActivity, "Password tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(this@RegisterActivity, "Password tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
             } else {
                 saveData()
             }

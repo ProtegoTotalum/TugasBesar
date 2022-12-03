@@ -3,7 +3,9 @@ package com.grayfien.testugd1
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.grayfien.testugd1.databinding.ActivityAddPasienBinding
+import com.grayfien.testugd1.databinding.ActivityRegisterBinding
 import com.shashank.sony.fancytoastlib.FancyToast
+import kotlinx.android.synthetic.main.activity_add_pasien.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,10 +17,29 @@ class AddPasienActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddPasienBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val view = binding.root
+        setContentView(view)
 
         binding.btnAddPasien.setOnClickListener {
-            saveData()
+            val id_pasien = txt_id_pasien.text.toString()
+            val nama_pasien = txt_nama_pasien.text.toString()
+            val email_pasien = txt_email_pasien.text.toString()
+            val tglLahir_pasien = txt_tglLahir_pasien.text.toString()
+            val noTelp_pasien = txt_noTelp_pasien.text.toString()
+
+            if (id_pasien.isEmpty()){
+                FancyToast.makeText(this@AddPasienActivity, "ID tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
+            }else if (nama_pasien.isEmpty()){
+                FancyToast.makeText(this@AddPasienActivity, "Nama pasien tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
+            }else if (email_pasien.isEmpty()){
+                FancyToast.makeText(this@AddPasienActivity, "Email pasien tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
+            }else if (tglLahir_pasien.isEmpty()){
+                FancyToast.makeText(this@AddPasienActivity, "Tanggal lahir pasien tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
+            }else if (noTelp_pasien.isEmpty()){
+                FancyToast.makeText(this@AddPasienActivity, "Nomor telepon tidak boleh kosong!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
+            }else{
+                saveData()
+            }
         }
     }
 

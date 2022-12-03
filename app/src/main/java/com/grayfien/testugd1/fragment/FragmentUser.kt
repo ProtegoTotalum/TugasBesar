@@ -1,4 +1,4 @@
-package com.grayfien.testugd1
+package com.grayfien.testugd1.fragment
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -8,6 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.grayfien.testugd1.EditUserActivity
+import com.grayfien.testugd1.HomeActivity
+import com.grayfien.testugd1.Preference
+import com.grayfien.testugd1.RClient
 import com.grayfien.testugd1.dataClass.ResponseDataUser
 import com.grayfien.testugd1.dataClass.UserData
 import com.grayfien.testugd1.databinding.FragmentUserBinding
@@ -25,6 +29,7 @@ class FragmentUser : Fragment() {
     private var b: Bundle? = null
     private val listUser = ArrayList<UserData>()
     private var id_user: String = ""
+    private lateinit var shareP: Preference
 
 
     override fun onCreateView(
@@ -36,25 +41,33 @@ class FragmentUser : Fragment() {
         _binding = FragmentUserBinding.inflate(inflater, container, false)
         id_user = activity!!.getId().toString()
 
-        id_user?.let { getDataUser(it) }
-
         binding.btnUpdate.setOnClickListener {
             val intent = Intent(requireActivity(), EditUserActivity::class.java)
             intent.putExtra("id_user", id_user)
             startActivity(intent)
         }
-
-
         return binding.root
+
+        getDataUser()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        shareP = Preference(requireContext())
+    }
 
-    private fun getDataUser(id: String) {
+    override fun onStart() {
+        super.onStart()
+        getDataUser()
+    }
+
+    private fun getDataUser() {
         val id_user = b?.getString("id")
-        id_user?.let { getDataUser(it) }
 
-        Log.d("retrooo", id)
-        RClient.instances.getData(id).enqueue(object : Callback<ResponseDataUser> {
+        val token_auth = "Bearer ${shareP.getToken()}"
+
+        Log.d("retrooo", id.toString())
+        RClient.instances.getData(token_auth, id_user).enqueue(object : Callback<ResponseDataUser> {
             override fun onResponse(
                 call: Call<ResponseDataUser>,
                 response: Response<ResponseDataUser>

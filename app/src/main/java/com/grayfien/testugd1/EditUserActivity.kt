@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.grayfien.testugd1.dataClass.ResponseDataUser
 import com.grayfien.testugd1.dataClass.UserData
 import com.grayfien.testugd1.databinding.ActivityEditUserBinding
+import com.grayfien.testugd1.fragment.FragmentUser
 import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.android.synthetic.main.activity_edit_user.*
 import kotlinx.android.synthetic.main.activity_main.*

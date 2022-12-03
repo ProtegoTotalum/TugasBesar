@@ -6,6 +6,7 @@ import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.grayfien.testugd1.databinding.ActivityPasienBinding
+import com.grayfien.testugd1.fragment.FragmentPasien
 
 class PasienActivity : AppCompatActivity() {
 

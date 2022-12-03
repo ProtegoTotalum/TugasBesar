@@ -12,6 +12,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
+import com.grayfien.testugd1.fragment.FragmentHome
 import kotlinx.android.synthetic.main.activity_pie_chart.*
 
 class PieChartActivity : AppCompatActivity() {

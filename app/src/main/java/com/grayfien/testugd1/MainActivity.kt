@@ -11,13 +11,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import com.grayfien.testugd1.dataClass.UserResponse
 import com.grayfien.testugd1.package_room.UserDB
 import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -47,6 +48,8 @@ class MainActivity : AppCompatActivity() {
 
         getBundle()
 
+        setupAnim()
+
         inputUsername = findViewById(R.id.inputLayoutUsername)
         inputPassword = findViewById(R.id.inputLayoutPassword)
         mainLayout = findViewById(R.id.mainLayout)
@@ -54,16 +57,12 @@ class MainActivity : AppCompatActivity() {
         val btnLogin: Button = findViewById(R.id.btnLogin)
         val btnRegister: Button = findViewById(R.id.btnDaftar)
 
-
         btnClear.setOnClickListener {
             inputUsername.getEditText()?.setText("")
             inputPassword.getEditText()?.setText("")
 
             Snackbar.make(mainLayout, "Text Cleared Success", Snackbar.LENGTH_LONG).show()
         }
-
-
-
 
         btnLogin.setOnClickListener(View.OnClickListener {
             var checkLogin = false
@@ -88,11 +87,19 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun setupAnim() {
+        val animation: LottieAnimationView = findViewById(R.id.imageView)
+
+        animation.playAnimation()
+        animation.loop(true)
+    }
+
     fun login() {
         val username = input_username.text.toString().trim()
         val password = input_password.text.toString().trim()
 
-        RClient.instances.login(username, password).enqueue(object : Callback<UserResponse> {
+        RClient.instances.login(username, password)
+            .enqueue(object : Callback<UserResponse> {
             override fun onResponse(
                 call: Call<UserResponse>,
                 response: Response<UserResponse>
@@ -100,6 +107,8 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val login = response.body()!!
 
+                    response.body()!!.token?.let { shareP.setToken(it) }
+                    shareP.setUser(login.data)
 
                     FancyToast.makeText(
                         this@MainActivity,
@@ -127,6 +136,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+
             }
         })
     }

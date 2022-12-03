@@ -1,4 +1,4 @@
-package com.grayfien.testugd1
+package com.grayfien.testugd1.fragment
 
 
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.grayfien.testugd1.PasienAdapter
+import com.grayfien.testugd1.RClient
 import com.grayfien.testugd1.dataClass.PasienData
 import com.grayfien.testugd1.dataClass.ResponseDataPasien
 import com.grayfien.testugd1.databinding.FragmentPasienBinding

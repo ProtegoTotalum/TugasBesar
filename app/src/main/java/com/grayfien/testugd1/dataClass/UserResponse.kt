@@ -1,4 +1,4 @@
-package com.grayfien.testugd1
+package com.grayfien.testugd1.dataClass
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -8,10 +8,13 @@ class UserResponse {
     val stt: String? = null
 
     @SerializedName("error")
-    val e: Boolean? = null
+    val err: Boolean? = null
 
-    @SerializedName("message")
-    val pesan: String? = null
+    @SerializedName("messages")
+    val msg: String? = null
+
+    @SerializedName("token")
+    val token: String? = null
 
     @SerializedName("data")
     val data: User? = null

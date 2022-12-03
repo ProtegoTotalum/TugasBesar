@@ -3,14 +3,16 @@ package com.grayfien.testugd1
 
 import com.grayfien.testugd1.dataClass.ResponseDataPasien
 import com.grayfien.testugd1.dataClass.ResponseDataUser
+import com.grayfien.testugd1.dataClass.UserResponse
 import retrofit2.Call
 import retrofit2.http.*
 
 interface api {
     @GET("akun/{cari}")
-    fun getData(@Path("cari") cari: String? = null):
+    fun getData(
+        @Header("Authorization") token_auth: String?,
+        @Path("cari") cari: String? = null):
             Call<ResponseDataUser>
-
 
     @FormUrlEncoded
     @POST("akun")
@@ -24,11 +26,10 @@ interface api {
         @Field("noTelp") noTelp: String?,
     ): Call<ResponseCreate>
 
-    @FormUrlEncoded
-    @POST("login")
+    @GET("login")
     fun login(
-        @Field("username") username: String?,
-        @Field("password") password: String?,
+        @Query("username") username: String?,
+        @Query("password") password: String?,
     ): Call<UserResponse>
 
     @FormUrlEncoded

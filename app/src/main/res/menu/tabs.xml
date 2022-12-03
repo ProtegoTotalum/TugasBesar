@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menuHome"
+        android:id="@+id/tab_home"
         android:title="Home"
         android:icon="@drawable/ic_home_24" />
 
     <item
-        android:id="@+id/menuPasien"
+        android:id="@+id/tab_pasien"
         android:title="Pasien"
         android:icon="@drawable/patient" />
 
     <item
-        android:id="@+id/menuProfil"
+        android:id="@+id/tab_profil"
         android:title="Profil"
-        android:icon="@drawable/ic_person_24" />
+        android:icon="@drawable/account_box" />
 
     <item
-        android:id="@+id/menuLogOut"
+        android:id="@+id/logout"
         android:icon="@drawable/logout"
         android:title="Log Out" />
 

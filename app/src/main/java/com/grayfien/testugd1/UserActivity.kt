@@ -18,7 +18,7 @@ class UserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserBinding.inflate(layoutInflater)
-        db = Room.databaseBuilder(applicationContext, UserDB::class.java, "user-db").build()
+//        db = Room.databaseBuilder(applicationContext, UserDB::class.java, "user-db").build()
         val view = binding.root
         setContentView(view)
         shareP = Preference(this)

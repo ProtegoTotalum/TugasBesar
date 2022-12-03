@@ -53,17 +53,17 @@ class HomeActivity : AppCompatActivity() {
                 when(newTab.id) {
                     R.id.tab_home -> setCurrentFragment(firstFragment)
 
-                    R.id.tab_pasien -> setCurrentFragment(secondFragment)
+                    //R.id.tab_pasien -> setCurrentFragment(secondFragment)
                     R.id.tab_pasien -> {
                         val intent = Intent(this@HomeActivity, PasienActivity::class.java)
                         startActivity(intent)
                     }
 
                     R.id.tab_profil -> setCurrentFragment(thirdFragment)
-                    R.id.tab_profil -> {
-                        val intent = Intent(this@HomeActivity, UserActivity::class.java)
-                        startActivity(intent)
-                    }
+//                    R.id.tab_profil -> {
+//                        val intent = Intent(this@HomeActivity, UserActivity::class.java)
+//                        startActivity(intent)
+//                    }
 
                     R.id.logout -> {
                         val builder: AlertDialog.Builder = AlertDialog.Builder(this@HomeActivity)

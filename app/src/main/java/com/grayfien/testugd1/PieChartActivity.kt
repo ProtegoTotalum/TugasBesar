@@ -95,7 +95,7 @@ class PieChartActivity : AppCompatActivity() {
         pieChart.invalidate()
 
         btnClose.setOnClickListener {
-            val moveHome = Intent(this@PieChartActivity, FragmentHome::class.java)
+            val moveHome = Intent(this@PieChartActivity, HomeActivity::class.java)
             startActivity(moveHome)
         }
 

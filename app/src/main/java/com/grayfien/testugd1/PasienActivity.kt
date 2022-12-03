@@ -29,6 +29,9 @@ class PasienActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener{
             startActivity(Intent(this,AddPasienActivity::class.java))
         }
+        binding.btnCancel.setOnClickListener{
+            startActivity(Intent(this,HomeActivity::class.java))
+        }
     }
 
     fun showDataFragment (){

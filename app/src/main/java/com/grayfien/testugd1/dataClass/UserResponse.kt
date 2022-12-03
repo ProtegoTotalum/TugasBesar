@@ -8,13 +8,13 @@ class UserResponse {
     val stt: String? = null
 
     @SerializedName("error")
-    val err: Boolean? = null
+    val e: Boolean? = null
 
     @SerializedName("messages")
-    val msg: String? = null
+    val pesan: String? = null
 
-    @SerializedName("token")
-    val token: String? = null
+//    @SerializedName("token")
+//    val token: String? = null
 
     @SerializedName("data")
     val data: User? = null

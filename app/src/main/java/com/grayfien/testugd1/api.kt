@@ -9,9 +9,7 @@ import retrofit2.http.*
 
 interface api {
     @GET("akun/{cari}")
-    fun getData(
-        @Header("Authorization") token_auth: String?,
-        @Path("cari") cari: String? = null):
+    fun getData(@Path("cari") cari:String? = null):
             Call<ResponseDataUser>
 
     @FormUrlEncoded
@@ -26,11 +24,12 @@ interface api {
         @Field("noTelp") noTelp: String?,
     ): Call<ResponseCreate>
 
-    @GET("login")
+    @FormUrlEncoded
+    @POST("login")
     fun login(
-        @Query("username") username: String?,
-        @Query("password") password: String?,
-    ): Call<UserResponse>
+        @Field("username") username:String?,
+        @Field("password") password:String?,
+    ):Call<UserResponse>
 
     @FormUrlEncoded
     @PUT("akun/{id}")

@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         getBundle()
 
-        setupAnim()
+        //setupAnim()
 
         inputUsername = findViewById(R.id.inputLayoutUsername)
         inputPassword = findViewById(R.id.inputLayoutPassword)
@@ -107,8 +107,8 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val login = response.body()!!
 
-                    response.body()!!.token?.let { shareP.setToken(it) }
-                    shareP.setUser(login.data)
+//                    response.body()!!.token?.let { shareP.setToken(it) }
+//                    shareP.setUser(login.data)
 
                     FancyToast.makeText(
                         this@MainActivity,

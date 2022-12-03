@@ -30,7 +30,7 @@ class FragmentPasien : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentPasienBinding.inflate(inflater, container, false)
+        _binding = FragmentPasienBinding.inflate(inflater, container,false)
         return binding.root
         getDataPasien()
     }
@@ -41,23 +41,22 @@ class FragmentPasien : Fragment() {
         getDataPasien()
     }
 
-    private fun getDataPasien() {
+    private fun getDataPasien(){
         binding.rvData.setHasFixedSize(true)
         binding.rvData.layoutManager = LinearLayoutManager(context)
         val bundle = arguments
         val cari = bundle?.getString("cari")
         binding.progressBar.visibility
-        RClient.instances.getDataPasien(cari).enqueue(object : Callback<ResponseDataPasien> {
+        RClient.instances.getDataPasien(cari).enqueue(object : Callback<ResponseDataPasien>{
             override fun onResponse(
                 call: Call<ResponseDataPasien>,
                 response: Response<ResponseDataPasien>
             ) {
-                if (response.isSuccessful) {
+                if(response.isSuccessful){
                     listPasien.clear()
                     response.body()?.let {
-                        listPasien.addAll(it.data)
-                    }
-                    val adapter = PasienAdapter(listPasien, requireContext())
+                        listPasien.addAll(it.data) }
+                    val adapter = PasienAdapter (listPasien, requireContext())
                     binding.rvData.adapter = adapter
                     adapter.notifyDataSetChanged()
                     binding.progressBar.isVisible = false

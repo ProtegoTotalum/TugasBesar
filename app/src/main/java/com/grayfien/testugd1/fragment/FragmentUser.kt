@@ -37,18 +37,20 @@ class FragmentUser : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val activity: HomeActivity? = activity as HomeActivity?
+        val activity:HomeActivity? = activity as HomeActivity?
         _binding = FragmentUserBinding.inflate(inflater, container, false)
         id_user = activity!!.getId().toString()
+
+        id_user?.let{ getDataUser(it)}
 
         binding.btnUpdate.setOnClickListener {
             val intent = Intent(requireActivity(), EditUserActivity::class.java)
             intent.putExtra("id_user", id_user)
             startActivity(intent)
         }
-        return binding.root
 
-        getDataUser()
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,27 +58,20 @@ class FragmentUser : Fragment() {
         shareP = Preference(requireContext())
     }
 
-    override fun onStart() {
-        super.onStart()
-        getDataUser()
-    }
-
-    private fun getDataUser() {
+    private fun getDataUser(id:String){
         val id_user = b?.getString("id")
+        id_user?.let{ getDataUser(it)}
 
-        val token_auth = "Bearer ${shareP.getToken()}"
-
-        Log.d("retrooo", id.toString())
-        RClient.instances.getData(token_auth, id_user).enqueue(object : Callback<ResponseDataUser> {
+        Log.d("retrooo",id)
+        RClient.instances.getData(id).enqueue(object : Callback<ResponseDataUser> {
             override fun onResponse(
-                call: Call<ResponseDataUser>,
+                call:Call<ResponseDataUser>,
                 response: Response<ResponseDataUser>
-            ) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        listUser.addAll(it.data)
-                    }
-                    with(binding) {
+            ){
+                if(response.isSuccessful){
+                    response.body()?.let{
+                        listUser.addAll(it.data) }
+                    with(binding){
                         editNama.setText(listUser[0].nama)
                         editEmail.setText(listUser[0].email)
                         editTglLahir.setText(listUser[0].tgLahir)
@@ -84,7 +79,6 @@ class FragmentUser : Fragment() {
                     }
                 }
             }
-
             override fun onFailure(call: Call<ResponseDataUser>, t: Throwable) {
                 val alertDialog = AlertDialog.Builder(requireActivity())
                 alertDialog.apply {

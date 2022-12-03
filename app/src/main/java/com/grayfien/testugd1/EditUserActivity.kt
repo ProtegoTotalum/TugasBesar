@@ -100,15 +100,15 @@ class EditUserActivity : AppCompatActivity() {
         setContentView(binding?.root)
     }
 
-    fun getDetailData(id: String) {
-        RClient.instances.getData(id).enqueue(object : Callback<ResponseDataUser> {
+    fun getDetailData(id:String){
+        RClient.instances.getData(id).enqueue(object :Callback<ResponseDataUser>{
             override fun onResponse(
                 call: Call<ResponseDataUser>,
                 response: Response<ResponseDataUser>
             ) {
-                if (response.isSuccessful) {
+                if (response.isSuccessful){
                     response.body()?.let { listUser.addAll(it.data) }
-                    with(binding) {
+                    with(binding){
                         editNama.setText(listUser[0].nama)
                         editUsername.setText(listUser[0].username)
                         editPas.setText(listUser[0].password)

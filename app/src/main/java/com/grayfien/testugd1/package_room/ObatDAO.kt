@@ -14,8 +14,8 @@ interface ObatDAO {
     suspend fun deleteObat(obat: Obat)
 
     @Query("SELECT *FROM obat")
-    suspend fun getObat() : List<Obat>
+    suspend fun getObat(): List<Obat>
 
     @Query("SELECT * FROM obat where id =:obat_id")
-    suspend fun getObat(obat_id: Int) : List<Obat>
+    suspend fun getObat(obat_id: Int): List<Obat>
 }

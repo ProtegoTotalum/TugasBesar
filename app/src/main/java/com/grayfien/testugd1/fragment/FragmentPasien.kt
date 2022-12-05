@@ -1,29 +1,20 @@
-package com.grayfien.testugd1
+package com.grayfien.testugd1.fragment
 
 
-import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import com.grayfien.testugd1.R.layout.fragment_pasien
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.grayfien.testugd1.PasienAdapter
+import com.grayfien.testugd1.RClient
 import com.grayfien.testugd1.dataClass.PasienData
 import com.grayfien.testugd1.dataClass.ResponseDataPasien
 import com.grayfien.testugd1.databinding.FragmentPasienBinding
-import com.grayfien.testugd1.package_room.Constant
-import com.grayfien.testugd1.package_room.Pasien
-import com.grayfien.testugd1.package_room.PasienDB
 import kotlinx.android.synthetic.main.activity_pasien.*
 import kotlinx.android.synthetic.main.fragment_pasien.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -77,6 +68,7 @@ class FragmentPasien : Fragment() {
             }
         })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

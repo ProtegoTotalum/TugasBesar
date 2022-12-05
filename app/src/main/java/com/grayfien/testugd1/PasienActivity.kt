@@ -1,25 +1,14 @@
 package com.grayfien.testugd1
 
-import android.app.AlertDialog
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.grayfien.testugd1.databinding.ActivityPasienBinding
-import com.grayfien.testugd1.package_room.Constant
-import com.grayfien.testugd1.package_room.Pasien
-import com.grayfien.testugd1.package_room.PasienDB
-import kotlinx.android.synthetic.main.activity_pasien.*
-import kotlinx.android.synthetic.main.fragment_pasien.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.grayfien.testugd1.fragment.FragmentPasien
+
 
 class PasienActivity : AppCompatActivity() {
 
@@ -39,6 +28,9 @@ class PasienActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener{
             startActivity(Intent(this,AddPasienActivity::class.java))
+        }
+        binding.btnCancel.setOnClickListener{
+            startActivity(Intent(this,HomeActivity::class.java))
         }
     }
 

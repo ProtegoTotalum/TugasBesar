@@ -16,14 +16,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/shadow"
+        app:layout_constraintTop_toTopOf="@+id/bottomNavigationView"/>
+
+    <nl.joery.animatedbottombar.AnimatedBottomBar
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
+        app:abb_animationInterpolator="@android:anim/overshoot_interpolator"
+        app:abb_tabs="@menu/tabs"
+        app:abb_badgeBackgroundColor="#5A33A0"
+        app:abb_iconSize="26dp"
+        app:abb_indicatorColor="#8C71BD"
+        app:abb_rippleColor="#1B1D4A"
+        app:abb_tabColor="#805BC3"
+        app:abb_tabColorSelected="#9576CD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

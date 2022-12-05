@@ -1,26 +1,28 @@
 package com.grayfien.testugd1
 
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.app.NotificationCompat
-import android.content.Intent
-import android.os.Build
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Intent
 import android.media.RingtoneManager
+import android.os.Build
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
 
-
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        if(remoteMessage.notification != null){
-            sendNotification(remoteMessage.notification!!.title.toString(), remoteMessage.notification!!.body.toString())
+        if (remoteMessage.notification != null) {
+            sendNotification(
+                remoteMessage.notification!!.title.toString(),
+                remoteMessage.notification!!.body.toString()
+            )
         }
     }
 
-    private fun sendNotification(messageTitle: String, messageBody: String){
+    private fun sendNotification(messageTitle: String, messageBody: String) {
         val intent = Intent(this, MyFirebaseMessagingService::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
@@ -39,11 +41,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // since android Oreo Notification channel is needed.
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val channel = NotificationChannel(channelId, "Notification Title", NotificationManager.IMPORTANCE_HIGH)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Notification Title",
+                NotificationManager.IMPORTANCE_HIGH
+            )
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
-            with(NotificationManagerCompat.from(this)){
+            with(NotificationManagerCompat.from(this)) {
                 notify(0, notificationBuilder.build())
             }
         }

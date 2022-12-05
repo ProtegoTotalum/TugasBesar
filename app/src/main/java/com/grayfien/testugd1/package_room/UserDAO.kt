@@ -15,12 +15,12 @@ interface UserDAO {
     suspend fun deleteUser(user: User)
 
     @Query("SELECT *FROM user")
-    suspend fun getAllUser() : List<User>
+    suspend fun getAllUser(): List<User>
 
 
     @Query("SELECT  *FROM user WHERE username=:user AND password=:pass")
-    suspend fun getUser(user: String, pass:String) : User
+    suspend fun getUser(user: String, pass: String): User
 
     @Query("SELECT *FROM user where id =:user_id")
-    suspend fun getUserID(user_id: Int?) : User
+    suspend fun getUserID(user_id: Int?): User
 }

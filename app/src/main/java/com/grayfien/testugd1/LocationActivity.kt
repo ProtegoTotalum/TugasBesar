@@ -1,9 +1,8 @@
 package com.grayfien.testugd1
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.android.synthetic.main.activity_location.*
 import org.json.JSONException
@@ -43,7 +42,7 @@ class LocationActivity : AppCompatActivity() {
     }
 
     //get lat long
-    private fun getLocationMarker(){
+    private fun getLocationMarker() {
         try {
             val stream = assets.open("sample_maps.json")
             val size = stream.available()
@@ -54,7 +53,7 @@ class LocationActivity : AppCompatActivity() {
             try {
                 val jsonObject = JSONObject(strContent)
                 val jsonArrayResult = jsonObject.getJSONArray("results")
-                for (i in 0 until jsonArrayResult.length()){
+                for (i in 0 until jsonArrayResult.length()) {
                     val jsonObjectResult = jsonArrayResult.getJSONObject(i)
                     val modelMain = ModelMain()
                     modelMain.strName = jsonObjectResult.getString("name")
@@ -68,10 +67,10 @@ class LocationActivity : AppCompatActivity() {
                     modelMainList.add(modelMain)
                 }
                 initMarker(modelMainList)
-            }catch (e: JSONException){
+            } catch (e: JSONException) {
                 e.printStackTrace()
             }
-        }catch (ignored: IOException){
+        } catch (ignored: IOException) {
             FancyToast.makeText(
                 this@LocationActivity,
                 "Oops, ada yang tidak beres. Coba ulangi beberapa saat lagi",
@@ -82,8 +81,8 @@ class LocationActivity : AppCompatActivity() {
         }
     }
 
-    private fun initMarker(modelList: List<ModelMain>){
-        for (i in modelList.indices){
+    private fun initMarker(modelList: List<ModelMain>) {
+        for (i in modelList.indices) {
             overlayItem = ArrayList()
             overlayItem.add(
                 OverlayItem(
@@ -101,7 +100,7 @@ class LocationActivity : AppCompatActivity() {
             marker.position = GeoPoint(modelList[i].latLoc, modelList[i].longLoc)
             marker.relatedObject = info
             marker.infoWindow = CustomInfoWindow(mapView)
-            marker.setOnMarkerClickListener{item, arg1 ->
+            marker.setOnMarkerClickListener { item, arg1 ->
                 item.showInfoWindow()
                 true
             }
@@ -114,7 +113,7 @@ class LocationActivity : AppCompatActivity() {
     public override fun onResume() {
         super.onResume()
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this))
-        if(mapView != null){
+        if (mapView != null) {
             mapView.onResume()
         }
     }
@@ -122,7 +121,7 @@ class LocationActivity : AppCompatActivity() {
     public override fun onPause() {
         super.onPause()
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this))
-        if(mapView != null){
+        if (mapView != null) {
             mapView.onPause()
         }
     }

@@ -1,30 +1,21 @@
 package com.grayfien.testugd1
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.grayfien.testugd1.dataClass.PasienData
 import com.grayfien.testugd1.dataClass.ResponseDataPasien
 import com.grayfien.testugd1.databinding.ActivityEditPasienBinding
-import com.grayfien.testugd1.package_room.Constant
-import com.grayfien.testugd1.package_room.Pasien
-import com.grayfien.testugd1.package_room.PasienDB
 import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.android.synthetic.main.activity_edit_pasien.*
 import kotlinx.android.synthetic.main.fragment_pasien.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class EditPasienActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityEditPasienBinding
-    private var b:Bundle? = null
+    private lateinit var binding: ActivityEditPasienBinding
+    private var b: Bundle? = null
     private var listPasien = java.util.ArrayList<PasienData>()
 
     @SuppressLint("RestrictedApi")
@@ -42,17 +33,26 @@ class EditPasienActivity : AppCompatActivity() {
 
         id_pasien?.let { getDetailData(it) }
 
-        binding.btnUpdate.setOnClickListener{
-            with(binding){
+        binding.btnUpdate.setOnClickListener {
+            with(binding) {
                 val nama_pasien = editNamaPasien.text.toString()
                 val email_pasien = editEmailPasien.text.toString()
                 val tglLahir_pasien = editTglLahirPasien.text.toString()
                 val noTelp_pasien = editNoTelpPasien.text.toString()
 
-                RClient.instances.updateDataPasien(id_pasien,nama_pasien,email_pasien,tglLahir_pasien,noTelp_pasien).enqueue(object :
+                RClient.instances.updateDataPasien(
+                    id_pasien,
+                    nama_pasien,
+                    email_pasien,
+                    tglLahir_pasien,
+                    noTelp_pasien
+                ).enqueue(object :
                     Callback<ResponseCreate> {
-                    override fun onResponse(call: Call<ResponseCreate>, response: Response<ResponseCreate>){
-                        if (response.isSuccessful){
+                    override fun onResponse(
+                        call: Call<ResponseCreate>,
+                        response: Response<ResponseCreate>
+                    ) {
+                        if (response.isSuccessful) {
                             FancyToast.makeText(
                                 applicationContext,
                                 "${response.body()?.pesan}",
@@ -72,15 +72,15 @@ class EditPasienActivity : AppCompatActivity() {
         }
     }
 
-    fun getDetailData(id_pasien:String){
+    fun getDetailData(id_pasien: String) {
         RClient.instances.getDataPasien(id_pasien).enqueue(object : Callback<ResponseDataPasien> {
             override fun onResponse(
                 call: Call<ResponseDataPasien>,
                 response: Response<ResponseDataPasien>
             ) {
-                if (response.isSuccessful){
-                    response.body()?.let{listPasien.addAll(it.data)}
-                    with(binding){
+                if (response.isSuccessful) {
+                    response.body()?.let { listPasien.addAll(it.data) }
+                    with(binding) {
                         editIdPasien.setText(listPasien[0].id_pasien)
                         editNamaPasien.setText(listPasien[0].nama_pasien)
                         editEmailPasien.setText(listPasien[0].email_pasien)
@@ -98,7 +98,6 @@ class EditPasienActivity : AppCompatActivity() {
 
 
 }
-
 
 
 /*

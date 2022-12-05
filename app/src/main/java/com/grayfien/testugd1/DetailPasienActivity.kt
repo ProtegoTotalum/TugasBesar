@@ -1,9 +1,9 @@
 package com.grayfien.testugd1
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.grayfien.testugd1.dataClass.PasienData
 import com.grayfien.testugd1.dataClass.ResponseDataPasien
 import com.grayfien.testugd1.databinding.ActivityDetailPasienBinding
@@ -13,8 +13,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DetailPasienActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityDetailPasienBinding
-    private var b:Bundle? = null
+    private lateinit var binding: ActivityDetailPasienBinding
+    private var b: Bundle? = null
     private val listPasien = ArrayList<PasienData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,17 +38,17 @@ class DetailPasienActivity : AppCompatActivity() {
         }
     }
 
-    fun getDataDetail(id_pasien:String){
-        RClient.instances.getDataPasien(id_pasien).enqueue(object : Callback<ResponseDataPasien>{
+    fun getDataDetail(id_pasien: String) {
+        RClient.instances.getDataPasien(id_pasien).enqueue(object : Callback<ResponseDataPasien> {
             override fun onResponse(
                 call: Call<ResponseDataPasien>,
                 response: Response<ResponseDataPasien>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     response.body()?.let {
                         listPasien.addAll(it.data)
                     }
-                    with(binding){
+                    with(binding) {
                         tvIdPasien.text = listPasien[0].id_pasien
                         tvNamaPasien.text = listPasien[0].nama_pasien
                         tvEmailPasien.text = listPasien[0].email_pasien
@@ -69,28 +69,28 @@ class DetailPasienActivity : AppCompatActivity() {
         this.recreate()
     }
 
-    fun deleteDataPasien(id_pasien: String){
+    fun deleteDataPasien(id_pasien: String) {
         val builder = AlertDialog.Builder(this@DetailPasienActivity)
         builder.setMessage("Yakin mau hapus data ?")
             .setCancelable(false)
-            .setPositiveButton("Ya"){
-                    dialog, id-> doDeleteData(id_pasien)
+            .setPositiveButton("Ya") { dialog, id ->
+                doDeleteData(id_pasien)
             }
-            .setNegativeButton("Tidak"){
-                    dialog, id -> dialog.dismiss()
+            .setNegativeButton("Tidak") { dialog, id ->
+                dialog.dismiss()
             }
 
         val alert = builder.create()
         alert.show()
     }
 
-    fun doDeleteData(id_pasien: String){
-        RClient.instances.deleteDataPasien(id_pasien).enqueue(object : Callback<ResponseCreate>{
+    fun doDeleteData(id_pasien: String) {
+        RClient.instances.deleteDataPasien(id_pasien).enqueue(object : Callback<ResponseCreate> {
             override fun onResponse(
                 call: Call<ResponseCreate>,
                 response: Response<ResponseCreate>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     FancyToast.makeText(
                         applicationContext,
                         "Data berhasil dihapus",

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailPasienActivity"
     android:orientation="vertical">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="5dp">
+
         <TextView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -21,7 +22,8 @@
             android:textAlignment="textStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp" />
+
         <TextView
             android:id="@+id/tv_id_pasien"
             android:textStyle="bold"
@@ -29,18 +31,21 @@
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:id="@+id/view_id_pasien"
-        android:background="?android:attr/listDivider"/>
+        android:background="?android:attr/listDivider" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="5dp">
+
         <TextView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -50,7 +55,8 @@
             android:textAlignment="textStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp" />
+
         <TextView
             android:id="@+id/tv_nama_pasien"
             android:textStyle="bold"
@@ -58,18 +64,21 @@
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:id="@+id/view_nama_pasien"
-        android:background="?android:attr/listDivider"/>
+        android:background="?android:attr/listDivider" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="5dp">
+
         <TextView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -79,7 +88,8 @@
             android:textAlignment="textStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp" />
+
         <TextView
             android:id="@+id/tv_email_pasien"
             android:textStyle="bold"
@@ -87,18 +97,21 @@
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:id="@+id/view_email_pasien"
-        android:background="?android:attr/listDivider"/>
+        android:background="?android:attr/listDivider" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="5dp">
+
         <TextView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -108,7 +121,8 @@
             android:textAlignment="textStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp" />
+
         <TextView
             android:id="@+id/tv_tglLahir_pasien"
             android:textStyle="bold"
@@ -116,18 +130,21 @@
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:id="@+id/view_tglLahir_pasien"
-        android:background="?android:attr/listDivider"/>
+        android:background="?android:attr/listDivider" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="5dp">
+
         <TextView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -137,7 +154,8 @@
             android:textAlignment="textStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp" />
+
         <TextView
             android:id="@+id/tv_noTelp_pasien"
             android:textStyle="bold"
@@ -145,20 +163,23 @@
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <View
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:id="@+id/view_noTelp_pasien"
-        android:background="?android:attr/listDivider"/>
+        android:background="?android:attr/listDivider" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="5dp">
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_delete_pasien"
             android:layout_width="wrap_content"
@@ -169,7 +190,8 @@
             android:textAllCaps="false"
             app:icon="@drawable/ic_delete"
             android:backgroundTint="@color/teal_700"
-            app:cornerRadius="10dp"/>
+            app:cornerRadius="10dp" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_edit_pasien"
             android:layout_width="wrap_content"
@@ -180,6 +202,6 @@
             app:cornerRadius="10dp"
             app:icon="@drawable/ic_edit"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

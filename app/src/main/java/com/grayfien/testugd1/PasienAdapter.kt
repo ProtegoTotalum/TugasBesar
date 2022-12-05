@@ -1,23 +1,18 @@
 package com.grayfien.testugd1
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.grayfien.testugd1.dataClass.PasienData
 import com.grayfien.testugd1.databinding.PasienAdapterBinding
 
-import kotlinx.android.synthetic.main.pasien_adapter.view.*
 
-
-class PasienAdapter(private val data:ArrayList<PasienData>, private val context: Context) :
+class PasienAdapter(private val data: ArrayList<PasienData>, private val context: Context) :
     RecyclerView.Adapter<PasienAdapter.PasienViewHolder>() {
 
-    inner class PasienViewHolder(item: PasienAdapterBinding) : RecyclerView.ViewHolder(item.root)
-    {
+    inner class PasienViewHolder(item: PasienAdapterBinding) : RecyclerView.ViewHolder(item.root) {
         private val binding = item
         fun bind(pasienData: PasienData) {
             with(binding) {
@@ -35,8 +30,15 @@ class PasienAdapter(private val data:ArrayList<PasienData>, private val context:
             }
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PasienViewHolder {
-        return PasienViewHolder(PasienAdapterBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return PasienViewHolder(
+            PasienAdapterBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: PasienViewHolder, position: Int) {

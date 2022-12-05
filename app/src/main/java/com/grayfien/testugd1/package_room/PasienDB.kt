@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.grayfien.testugd1.FragmentPasien
 
 
 @Database(
@@ -12,12 +11,13 @@ import com.grayfien.testugd1.FragmentPasien
     version = 2
 )
 
-abstract class PasienDB : RoomDatabase(){
+abstract class PasienDB : RoomDatabase() {
 
-    abstract fun pasienDao() : PasienDAO
+    abstract fun pasienDao(): PasienDAO
 
     companion object {
-        @Volatile private var instance : PasienDB? = null
+        @Volatile
+        private var instance: PasienDB? = null
         private val LOCK = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
@@ -35,13 +35,13 @@ abstract class PasienDB : RoomDatabase(){
                 .fallbackToDestructiveMigration()
                 .build()
 
-        fun getDatabase(context: Context): PasienDB{
+        fun getDatabase(context: Context): PasienDB {
             val temp = instance
-            if (temp != null){
-                return  temp
+            if (temp != null) {
+                return temp
             }
 
-            synchronized(this){
+            synchronized(this) {
                 val instance1 = Room.databaseBuilder(
                     context.applicationContext,
                     PasienDB::class.java,

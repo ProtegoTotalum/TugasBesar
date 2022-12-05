@@ -3,8 +3,8 @@ package com.grayfien.testugd1
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -12,6 +12,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
+import com.grayfien.testugd1.fragment.FragmentHome
 import kotlinx.android.synthetic.main.activity_pie_chart.*
 
 class PieChartActivity : AppCompatActivity() {
@@ -94,7 +95,7 @@ class PieChartActivity : AppCompatActivity() {
         pieChart.invalidate()
 
         btnClose.setOnClickListener {
-            val moveHome = Intent(this@PieChartActivity, FragmentHome::class.java)
+            val moveHome = Intent(this@PieChartActivity, HomeActivity::class.java)
             startActivity(moveHome)
         }
 

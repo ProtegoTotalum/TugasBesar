@@ -11,16 +11,17 @@ class ObatDB {
         version = 1
     )
 
-    abstract class ObatDB : RoomDatabase(){
+    abstract class ObatDB : RoomDatabase() {
 
-        abstract fun obatDao() : ObatDAO
+        abstract fun obatDao(): ObatDAO
 
         companion object {
-            @Volatile private var instance : ObatDB? = null
+            @Volatile
+            private var instance: ObatDB? = null
             private val LOCK = Any()
 
             operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
-                 instance ?: buildDatabase(context).also {
+                instance ?: buildDatabase(context).also {
                     instance = it
                 }
             }

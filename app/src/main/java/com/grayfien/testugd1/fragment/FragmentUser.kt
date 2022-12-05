@@ -1,35 +1,35 @@
-package com.grayfien.testugd1
+package com.grayfien.testugd1.fragment
 
 import android.app.AlertDialog
-import android.os.Bundle
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import com.grayfien.testugd1.EditUserActivity
+import com.grayfien.testugd1.HomeActivity
+import com.grayfien.testugd1.Preference
+import com.grayfien.testugd1.RClient
 import com.grayfien.testugd1.dataClass.ResponseDataUser
 import com.grayfien.testugd1.dataClass.UserData
 import com.grayfien.testugd1.databinding.FragmentUserBinding
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_user.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 @Suppress("UNREACHABLE_CODE")
-class FragmentUser : Fragment(){
+class FragmentUser : Fragment() {
     private var _binding: FragmentUserBinding? = null
     private val binding get() = _binding!!
-    private var b:Bundle? = null
+    private var b: Bundle? = null
     private val listUser = ArrayList<UserData>()
-    private var id_user: String =""
+    private var id_user: String = ""
+    private lateinit var shareP: Preference
 
 
     override fun onCreateView(
@@ -53,6 +53,10 @@ class FragmentUser : Fragment(){
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        shareP = Preference(requireContext())
+    }
 
     private fun getDataUser(id:String){
         val id_user = b?.getString("id")
@@ -91,6 +95,7 @@ class FragmentUser : Fragment(){
             }
         })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -5,7 +5,7 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.infowindow.InfoWindow
 
-class CustomInfoWindow(mapView: MapView?) : InfoWindow(R.layout.layout_tooltip, mapView){
+class CustomInfoWindow(mapView: MapView?) : InfoWindow(R.layout.layout_tooltip, mapView) {
     override fun onClose() {
         //default
     }

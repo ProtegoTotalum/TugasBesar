@@ -59,11 +59,42 @@
             app:errorEnabled="true"
             android:layout_marginBottom="8dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTglLahir"
-                android:inputType="text" />
+                android:layout_marginTop="-5dp"
+                android:layout_marginBottom="5dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTglLahir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Tanggal Lahir"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tampilEmail"
+                    tools:ignore="NotSibling" />
+
+                <TextView
+                    android:id="@+id/edittv_tglLahir_user"
+                    style="@style/ThemeOverlay.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="20dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:inputType="date"
+                    android:minHeight="48dp"
+                    android:text="Pilih Tanggal"
+                    app:drawableStartCompat="@drawable/ic_baseline_calendar_month_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editEmail"
+                    tools:ignore="NotSibling" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         </com.google.android.material.textfield.TextInputLayout>
 

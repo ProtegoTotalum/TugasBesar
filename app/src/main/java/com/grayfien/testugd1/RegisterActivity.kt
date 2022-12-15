@@ -1,5 +1,6 @@
 package com.grayfien.testugd1
 
+import android.app.DatePickerDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -13,6 +14,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.aminography.primecalendar.civil.CivilCalendar
+import com.aminography.primecalendar.civil.CivilCalendarUtils
+import com.aminography.primecalendar.common.CalendarType
+import com.aminography.primecalendar.common.operators.Year
+import com.aminography.primedatepicker.picker.PrimeDatePicker
+import com.aminography.primedatepicker.picker.callback.SingleDayPickCallback
+import com.aminography.primedatepicker.picker.theme.DarkThemeFactory
+import com.aminography.primedatepicker.picker.theme.abs.GotoViewTheme
 import com.grayfien.testugd1.databinding.ActivityRegisterBinding
 import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.android.synthetic.main.activity_register.*
@@ -20,6 +29,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -34,6 +44,22 @@ class RegisterActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         createNotificationChannel()
+
+        binding.tvTglLahirUser.setOnClickListener {
+
+            val callback = SingleDayPickCallback {
+                    singleDay -> binding.inputTanggalLahir.text =
+                dateToString(singleDay.dayOfMonth,singleDay.month,singleDay.year)
+            }
+
+            val today = CivilCalendar()
+            val datePicker = PrimeDatePicker.dialogWith(today)
+                .pickSingleDay(callback)
+                .initiallyPickedSingleDay(today)
+                .build()
+
+            datePicker.show(supportFragmentManager, "DD/MM/YYYY")
+        }
 
         binding.btnRegister.setOnClickListener {
             val id = inputId.text.toString()
@@ -68,6 +94,10 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(cancel)
         }
 
+    }
+
+    private fun dateToString(dayofMonth: Int, month: Int, year: Int): String {
+        return dayofMonth.toString()+"/"+(month+1)+"/"+year.toString()
     }
 
     fun saveData() {

@@ -4,101 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddPasienActivity">
+    tools:context=".AddObatActivity">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/txt_id_pasien"
+        android:id="@+id/txt_id_obat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
-        android:hint="ID Pasien"
+        android:hint="ID Obat"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/txt_nama_pasien"
+        android:id="@+id/txt_nama_obat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
-        android:hint="Nama Lengkap Anda"
+        android:hint="Nama Obat"
         android:minHeight="48dp"
         android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_id_pasien" />
+        app:layout_constraintTop_toBottomOf="@id/txt_id_obat" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/txt_email_pasien"
+        android:id="@+id/txt_jenis_obat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
-        android:hint="Email"
+        android:hint="Jenis Obat"
         android:minHeight="48dp"
         android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_nama_pasien" />
-
-    <TextView
-        style="@style/ThemeOverlay.Material3.TextInputEditText"
-        android:id="@+id/txt_tglLahir_pasien"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginStart="12dp"
-        android:drawablePadding="5dp"
-        android:gravity="center_vertical"
-        android:minHeight="48dp"
-        android:hint="Tanggal Lahir"
-        android:textSize="18sp"
-        android:textColorHint="#757575"
-        android:includeFontPadding="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_email_pasien"
-        tools:ignore="NotSibling" />
-
-    <TextView
-        android:id="@+id/tv_tglLahir_user"
-        style="@style/ThemeOverlay.Material3.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginEnd="20dp"
-        android:drawablePadding="5dp"
-        android:gravity="center_vertical"
-        android:inputType="date"
-        android:minHeight="48dp"
-        android:text="Pilih Tanggal"
-        app:drawableStartCompat="@drawable/ic_baseline_calendar_month_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_email_pasien" />
+        app:layout_constraintTop_toBottomOf="@id/txt_nama_obat" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/txt_noTelp_pasien"
+        android:id="@+id/txt_deskripsi_obat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
-        android:hint="No Telp"
+        android:hint="Deskripsi Obat"
         android:minHeight="48dp"
         android:textColorHint="#757575"
-        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_tglLahir_pasien" />
+        app:layout_constraintTop_toBottomOf="@id/txt_jenis_obat" />
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_add_pasien"
+        android:id="@+id/btn_add_obat"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_noTelp_pasien"
+        app:layout_constraintTop_toBottomOf="@id/txt_deskripsi_obat"
         android:text="Simpan Data"
         android:textAllCaps="false"
         android:layout_marginTop="30dp"

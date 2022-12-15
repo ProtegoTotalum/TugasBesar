@@ -99,4 +99,8 @@ dependencies {
 
     //AnimatedBottomBar
     implementation 'nl.joery.animatedbottombar:library:1.1.0'
+
+    //DatePicker
+    implementation 'com.aminography:primedatepicker:3.6.1'
+    implementation "com.aminography:primecalendar:1.7.0"
 }

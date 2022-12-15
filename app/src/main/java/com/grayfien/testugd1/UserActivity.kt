@@ -4,9 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import com.aminography.primecalendar.civil.CivilCalendar
+import com.aminography.primedatepicker.picker.PrimeDatePicker
+import com.aminography.primedatepicker.picker.callback.SingleDayPickCallback
 import com.grayfien.testugd1.databinding.ActivityUserBinding
 import com.grayfien.testugd1.package_room.UserDB
 import kotlinx.android.synthetic.main.activity_user.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class UserActivity : AppCompatActivity() {
 
@@ -29,12 +34,10 @@ class UserActivity : AppCompatActivity() {
         val tglLahir = shareP.getUser()?.tglLahir
         val noTelp = shareP.getUser()?.noTelp
 
-
         binding.editNama.setText(nama)
         binding.editEmail.setText(email)
         binding.editTglLahir.setText(tglLahir)
         binding.editNoTelp.setText(noTelp)
-
 
         btnEditProfile.setOnClickListener {
             val intent = Intent(this, EditUserActivity::class.java)
@@ -47,5 +50,9 @@ class UserActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun dateToString(dayofMonth: Int, month: Int, year: Int): String {
+        return dayofMonth.toString()+"/"+(month+1)+"/"+year.toString()
     }
 }

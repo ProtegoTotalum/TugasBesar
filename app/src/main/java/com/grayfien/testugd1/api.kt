@@ -1,6 +1,7 @@
 package com.grayfien.testugd1
 
 
+import com.grayfien.testugd1.dataClass.ResponseDataObat
 import com.grayfien.testugd1.dataClass.ResponseDataPasien
 import com.grayfien.testugd1.dataClass.ResponseDataUser
 import com.grayfien.testugd1.dataClass.UserResponse
@@ -34,7 +35,7 @@ interface api {
     @FormUrlEncoded
     @PUT("akun/{id}")
     fun updateData(
-        @Field("id") id: String?,
+        @Path("id") id: String?,
         @Field("nama") nama: String?,
         @Field("username") username: String?,
         @Field("password") password: String?,
@@ -42,6 +43,7 @@ interface api {
         @Field("tglLahir") tglLahir: String?,
         @Field("noTelp") noTelp: String?,
     ): Call<ResponseCreate>
+
 
 
     @GET("pasien/{cari}")
@@ -71,10 +73,41 @@ interface api {
     @FormUrlEncoded
     @PUT("pasien/{id_pasien}")
     fun updateDataPasien(
-        @Field("id_pasien") id_pasien: String?,
+        @Path("id_pasien") id_pasien: String?,
         @Field("nama_pasien") nama_pasien: String?,
         @Field("email_pasien") email_pasien: String?,
         @Field("tglLahir_pasien") tglLahir_pasien: String?,
         @Field("noTelp_pasien") noTelpPasien: String?,
+    ): Call<ResponseCreate>
+
+
+
+
+    @GET("obat/{cari}")
+    fun getDataObat(@Path("cari") cari: String? = null):
+            Call<ResponseDataObat>
+
+    @FormUrlEncoded
+    @POST("obat")
+    fun createDataObat(
+        @Field("id_obat") id_obat: String?,
+        @Field("nama_obat") nama_obat: String?,
+        @Field("jenis_obat") jenis_obat: String?,
+        @Field("deskripsi_obat") deskripsi_obat: String?,
+    ): Call<ResponseCreate>
+
+    @DELETE("obat/{id_obat}")
+    fun deleteDataObat(
+        @Path("id_obat") id_obat:
+        String?
+    ): Call<ResponseCreate>
+
+    @FormUrlEncoded
+    @PUT("obat/{id_obat}")
+    fun updateDataObat(
+        @Path("id_obat") id_obat: String?,
+        @Field("nama_obat") nama_obat: String?,
+        @Field("jenis_obat") jenis_obat: String?,
+        @Field("deskripsi_obat") deskripsi_obat: String?,
     ): Call<ResponseCreate>
 }

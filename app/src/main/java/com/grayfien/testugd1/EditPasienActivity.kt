@@ -1,8 +1,12 @@
 package com.grayfien.testugd1
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.aminography.primecalendar.civil.CivilCalendar
+import com.aminography.primedatepicker.picker.PrimeDatePicker
+import com.aminography.primedatepicker.picker.callback.SingleDayPickCallback
 import com.grayfien.testugd1.dataClass.PasienData
 import com.grayfien.testugd1.dataClass.ResponseDataPasien
 import com.grayfien.testugd1.databinding.ActivityEditPasienBinding
@@ -12,11 +16,14 @@ import kotlinx.android.synthetic.main.fragment_pasien.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class EditPasienActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditPasienBinding
     private var b: Bundle? = null
     private var listPasien = java.util.ArrayList<PasienData>()
+    private var dateString: String = ""
 
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +39,28 @@ class EditPasienActivity : AppCompatActivity() {
 
 
         id_pasien?.let { getDetailData(it) }
+
+        binding.tvTglLahirUser.setOnClickListener {
+            val callback = SingleDayPickCallback {
+                    singleDay ->
+                binding.editTglLahirPasien.text =
+                    dateToString(singleDay.dayOfMonth, singleDay.month, singleDay.year)
+            }
+
+            val date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("d/M/yyyy"))
+
+            val pickedDay = CivilCalendar().also {
+                it.year = date.year
+                it.month = date.monthValue-1
+                it.dayOfMonth = date.dayOfMonth
+            }
+
+            val datePicker = PrimeDatePicker.dialogWith(pickedDay)
+                .pickSingleDay(callback)
+                .initiallyPickedSingleDay(pickedDay)
+                .build()
+            datePicker.show(supportFragmentManager, "DD/MM/YYYY")
+        }
 
         binding.btnUpdate.setOnClickListener {
             with(binding) {
@@ -72,6 +101,14 @@ class EditPasienActivity : AppCompatActivity() {
         }
     }
 
+    private fun dateToString(dayofMonth: Int, month: Int, year: Int): String {
+        return dayofMonth.toString()+"/"+(month+1)+"/"+year.toString()
+    }
+
+    private fun getTanggalLahir(tgLahir: String): String {
+        return tgLahir
+    }
+
     fun getDetailData(id_pasien: String) {
         RClient.instances.getDataPasien(id_pasien).enqueue(object : Callback<ResponseDataPasien> {
             override fun onResponse(
@@ -86,6 +123,7 @@ class EditPasienActivity : AppCompatActivity() {
                         editEmailPasien.setText(listPasien[0].email_pasien)
                         editTglLahirPasien.setText(listPasien[0].tglLahir_pasien)
                         editNoTelpPasien.setText(listPasien[0].noTelp_pasien)
+                        dateString = getTanggalLahir(listPasien[0].tglLahir_pasien)
                     }
                 }
             }

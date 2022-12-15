@@ -4,112 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditPasienActivity">
+    tools:context=".EditObatActivity">
 
     <TextView
-        android:id="@+id/titlePasien"
+        android:id="@+id/titleObat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
-        android:text="Update Data Pasien"
+        android:text="Update Data Obat"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editNamaPasien"
+        app:layout_constraintBottom_toTopOf="@+id/editNamaObat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editIdPasien"
+        android:id="@+id/editIdObat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:hint="ID"
+        android:hint="ID Obat"
         android:inputType="text"
         android:minHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/titlePasien" />
+        app:layout_constraintTop_toTopOf="@+id/titleObat" />
 
     <EditText
-        android:id="@+id/editNamaPasien"
+        android:id="@+id/editNamaObat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:hint="Nama"
+        android:hint="Nama Obat"
         android:inputType="text"
         android:minHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editIdPasien" />
+        app:layout_constraintTop_toTopOf="@+id/editIdObat" />
 
     <EditText
-        android:id="@+id/editEmailPasien"
+        android:id="@+id/editJenisObat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:hint="Email"
+        android:hint="Jenis Obat"
         android:inputType="text"
         android:minHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editNamaPasien" />
-
-    <TextView
-        android:id="@+id/editTglLahirPasien"
-        style="@style/ThemeOverlay.Material3.TextInputEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:drawablePadding="5dp"
-        android:gravity="center_vertical"
-        android:hint="Tanggal Lahir"
-        android:includeFontPadding="true"
-        android:minHeight="50dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmailPasien"
-        tools:ignore="NotSibling" />
-
-    <TextView
-        android:id="@+id/tv_tglLahir_user"
-        style="@style/ThemeOverlay.Material3.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginEnd="20dp"
-        android:drawablePadding="5dp"
-        android:gravity="center_vertical"
-        android:inputType="date"
-        android:minHeight="50dp"
-        android:text="Pilih Tanggal"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:drawableStartCompat="@drawable/ic_baseline_calendar_month_24"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@id/editEmailPasien" />
+        app:layout_constraintTop_toTopOf="@+id/editNamaObat" />
 
     <EditText
-        android:id="@+id/editNoTelpPasien"
+        android:id="@+id/editDeskripsiObat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:hint="No Telepon"
+        android:hint="Deskripsi Obat"
         android:inputType="text"
         android:minHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTglLahirPasien" />
+        app:layout_constraintTop_toTopOf="@+id/editJenisObat" />
 
     <Button
         android:id="@+id/btnUpdate"
@@ -120,7 +82,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNoTelpPasien"
+        app:layout_constraintTop_toBottomOf="@+id/editDeskripsiObat"
         app:layout_constraintVertical_bias="0.093" />
 
 

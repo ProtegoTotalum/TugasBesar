@@ -2,6 +2,9 @@ package com.grayfien.testugd1
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.aminography.primecalendar.civil.CivilCalendar
+import com.aminography.primedatepicker.picker.PrimeDatePicker
+import com.aminography.primedatepicker.picker.callback.SingleDayPickCallback
 import com.grayfien.testugd1.databinding.ActivityAddPasienBinding
 import com.grayfien.testugd1.databinding.ActivityRegisterBinding
 import com.shashank.sony.fancytoastlib.FancyToast
@@ -19,6 +22,22 @@ class AddPasienActivity : AppCompatActivity() {
         binding = ActivityAddPasienBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        binding.tvTglLahirUser.setOnClickListener {
+
+            val callback = SingleDayPickCallback {
+                    singleDay -> binding.txtTglLahirPasien.text =
+                dateToString(singleDay.dayOfMonth,singleDay.month,singleDay.year)
+            }
+
+            val today = CivilCalendar()
+            val datePicker = PrimeDatePicker.dialogWith(today)
+                .pickSingleDay(callback)
+                .initiallyPickedSingleDay(today)
+                .build()
+
+            datePicker.show(supportFragmentManager, "DD/MM/YYYY")
+        }
 
         binding.btnAddPasien.setOnClickListener {
             val id_pasien = txt_id_pasien.text.toString()
@@ -41,6 +60,10 @@ class AddPasienActivity : AppCompatActivity() {
                 saveData()
             }
         }
+    }
+
+    private fun dateToString(dayofMonth: Int, month: Int, year: Int): String {
+        return dayofMonth.toString()+"/"+(month+1)+"/"+year.toString()
     }
 
     fun saveData() {

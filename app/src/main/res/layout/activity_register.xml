@@ -66,18 +66,56 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layTanggalLahir"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="dd/mm/yyyy"
-            android:id="@+id/layTanggalLahir"
+            android:layout_marginBottom="20dp"
+            android:hint="Tanggal Lahir"
             app:errorEnabled="true">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/inputTanggalLahir"
-                android:inputType="date" />
+                android:layout_marginTop="-5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/tv_tglLahir_user"
+                    style="@style/ThemeOverlay.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:inputType="date"
+                    android:minHeight="48dp"
+                    android:text="Pilih Tanggal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.925"
+                    app:layout_constraintStart_toEndOf="@id/inputTanggalLahir"
+                    app:layout_constraintTop_toBottomOf="@id/layTanggalLahir"
+                    app:drawableStartCompat="@drawable/ic_baseline_calendar_month_24"
+                    tools:ignore="NotSibling" />
+
+                <TextView
+                    android:id="@+id/inputTanggalLahir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="10dp"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp"
+                    android:text="Tanggal Lahir"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/material_dynamic_neutral50"
+                    android:textSize="16sp"
+                    android:includeFontPadding="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layTanggalLahir"
+                    tools:ignore="NotSibling" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.textfield.TextInputLayout>
 

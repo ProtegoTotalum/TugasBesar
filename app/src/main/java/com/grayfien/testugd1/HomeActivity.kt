@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.grayfien.testugd1.fragment.FragmentHome
+import com.grayfien.testugd1.fragment.FragmentObat
 import com.grayfien.testugd1.fragment.FragmentPasien
 import com.grayfien.testugd1.fragment.FragmentUser
 import nl.joery.animatedbottombar.AnimatedBottomBar
@@ -28,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
         val firstFragment = FragmentHome()
         val secondFragment = FragmentPasien()
         val thirdFragment = FragmentUser()
+        val fourthFragment = FragmentObat()
 
 
         setCurrentFragment(firstFragment)
@@ -56,6 +58,11 @@ class HomeActivity : AppCompatActivity() {
                     //R.id.tab_pasien -> setCurrentFragment(secondFragment)
                     R.id.tab_pasien -> {
                         val intent = Intent(this@HomeActivity, PasienActivity::class.java)
+                        startActivity(intent)
+                    }
+
+                    R.id.tab_obat -> {
+                        val intent = Intent(this@HomeActivity, ObatActivity::class.java)
                         startActivity(intent)
                     }
 

@@ -10,11 +10,11 @@
         android:id="@+id/titlePasien"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/aladin"
+        android:fontFamily="@font/roboto"
         android:text="Update Data Pasien"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="32sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/editNamaPasien"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,18 +60,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editNamaPasien" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTglLahirPasien"
+        style="@style/ThemeOverlay.Material3.TextInputEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
         android:hint="Tanggal Lahir"
-        android:inputType="text"
+        android:includeFontPadding="true"
         android:minHeight="50dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editEmailPasien" />
+        app:layout_constraintTop_toBottomOf="@+id/editEmailPasien"
+        tools:ignore="NotSibling" />
+
+    <TextView
+        android:id="@+id/tv_tglLahir_user"
+        style="@style/ThemeOverlay.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginEnd="20dp"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:inputType="date"
+        android:minHeight="50dp"
+        android:text="Pilih Tanggal"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:drawableStartCompat="@drawable/ic_baseline_calendar_month_24"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/editEmailPasien" />
 
     <EditText
         android:id="@+id/editNoTelpPasien"

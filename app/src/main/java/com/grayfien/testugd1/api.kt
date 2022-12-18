@@ -1,10 +1,7 @@
 package com.grayfien.testugd1
 
 
-import com.grayfien.testugd1.dataClass.ResponseDataObat
-import com.grayfien.testugd1.dataClass.ResponseDataPasien
-import com.grayfien.testugd1.dataClass.ResponseDataUser
-import com.grayfien.testugd1.dataClass.UserResponse
+import com.grayfien.testugd1.dataClass.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -109,5 +106,35 @@ interface api {
         @Field("nama_obat") nama_obat: String?,
         @Field("jenis_obat") jenis_obat: String?,
         @Field("deskripsi_obat") deskripsi_obat: String?,
+    ): Call<ResponseCreate>
+
+
+
+    @GET("supplier/{cari}")
+    fun getDataSupplier(@Path("cari") cari: String? = null):
+            Call<ResponseDataSupplier>
+
+    @FormUrlEncoded
+    @POST("supplier")
+    fun createDataSupplier(
+        @Field("id_supplier") id_supplier: String?,
+        @Field("nama_supplier") nama_supplier: String?,
+        @Field("email_supplier") email_supplier: String?,
+        @Field("noTelp_supplier") noTelp_supplier: String?,
+    ): Call<ResponseCreate>
+
+    @DELETE("supplier/{id_supplier}")
+    fun deleteDataSupplier(
+        @Path("id_supplier") id_supplier:
+        String?
+    ): Call<ResponseCreate>
+
+    @FormUrlEncoded
+    @PUT("supplier/{id_supplier}")
+    fun updateDataSupplier(
+        @Path("id_supplier") id_supplier: String?,
+        @Field("nama_supplier") nama_supplier: String?,
+        @Field("email_supplier") email_supplier: String?,
+        @Field("noTelp_supplier") noTelp_supplier: String?,
     ): Call<ResponseCreate>
 }

@@ -10,8 +10,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 
-class Accelero : AppCompatActivity(), SensorEventListener {
-
+class AcceleroActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var sensorManager: SensorManager
     private lateinit var square: TextView
 

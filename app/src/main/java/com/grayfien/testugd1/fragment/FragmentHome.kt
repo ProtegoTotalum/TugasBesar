@@ -47,7 +47,7 @@ class FragmentHome : Fragment() {
 
         btnAccel.setOnClickListener {
             startActivity(
-                Intent(requireActivity(), Accelero::class.java)
+                Intent(requireActivity(), AcceleroActivity::class.java)
             )
         }
     }

@@ -66,6 +66,11 @@ class HomeActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
 
+                    R.id.tab_supplier -> {
+                        val intent = Intent(this@HomeActivity, SupplierActivity::class.java)
+                        startActivity(intent)
+                    }
+
                     R.id.tab_profil -> setCurrentFragment(thirdFragment)
 //                    R.id.tab_profil -> {
 //                        val intent = Intent(this@HomeActivity, UserActivity::class.java)

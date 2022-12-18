@@ -16,6 +16,11 @@
         android:icon="@drawable/admin_meds" />
 
     <item
+        android:id="@+id/tab_supplier"
+        android:title="Supplier"
+        android:icon="@drawable/ic_baseline_factory_24" />
+
+    <item
         android:id="@+id/tab_profil"
         android:title="Profil"
         android:icon="@drawable/account_box" />

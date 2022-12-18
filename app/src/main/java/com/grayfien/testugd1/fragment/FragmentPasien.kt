@@ -1,6 +1,5 @@
 package com.grayfien.testugd1.fragment
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

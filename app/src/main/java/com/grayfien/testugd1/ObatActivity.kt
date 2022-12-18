@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import android.view.View
 import com.grayfien.testugd1.databinding.ActivityObatBinding
 import com.grayfien.testugd1.fragment.FragmentObat
+import com.grayfien.testugd1.fragment.FragmentUser
 
 
 class ObatActivity : AppCompatActivity() {
@@ -28,7 +29,7 @@ class ObatActivity : AppCompatActivity() {
             startActivity(Intent(this,AddObatActivity::class.java))
         }
         binding.btnCancelObat.setOnClickListener{
-            startActivity(Intent(this,HomeActivity::class.java))
+            startActivity(Intent(this,FragmentUser::class.java))
         }
     }
 

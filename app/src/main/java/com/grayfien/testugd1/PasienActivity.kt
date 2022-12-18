@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import com.grayfien.testugd1.databinding.ActivityPasienBinding
+import com.grayfien.testugd1.fragment.FragmentHome
 import com.grayfien.testugd1.fragment.FragmentPasien
 
 
@@ -30,7 +31,7 @@ class PasienActivity : AppCompatActivity() {
             startActivity(Intent(this,AddPasienActivity::class.java))
         }
         binding.btnCancel.setOnClickListener{
-            startActivity(Intent(this,HomeActivity::class.java))
+            startActivity(Intent(this,FragmentHome::class.java))
         }
     }
 

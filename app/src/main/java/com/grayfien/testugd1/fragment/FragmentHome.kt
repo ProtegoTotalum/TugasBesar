@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.grayfien.testugd1.LocationActivity
-import com.grayfien.testugd1.PieChartActivity
-import com.grayfien.testugd1.QrActivity
-import com.grayfien.testugd1.R
+import com.grayfien.testugd1.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class FragmentHome : Fragment() {
@@ -45,6 +42,12 @@ class FragmentHome : Fragment() {
         btnPieChart.setOnClickListener {
             startActivity(
                 Intent(requireActivity(), PieChartActivity::class.java)
+            )
+        }
+
+        btnAccel.setOnClickListener {
+            startActivity(
+                Intent(requireActivity(), Accelero::class.java)
             )
         }
     }

@@ -14,16 +14,15 @@ import androidx.fragment.app.FragmentManager
 import com.aminography.primecalendar.civil.CivilCalendar
 import com.aminography.primedatepicker.picker.PrimeDatePicker
 import com.aminography.primedatepicker.picker.callback.SingleDayPickCallback
-import com.grayfien.testugd1.EditUserActivity
-import com.grayfien.testugd1.HomeActivity
-import com.grayfien.testugd1.Preference
-import com.grayfien.testugd1.RClient
+import com.grayfien.testugd1.*
 import com.grayfien.testugd1.dataClass.ResponseDataUser
 import com.grayfien.testugd1.dataClass.UserData
 import com.grayfien.testugd1.databinding.FragmentUserBinding
 import com.shashank.sony.fancytoastlib.FancyToast
+import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_user.*
+import kotlinx.android.synthetic.main.fragment_user.btnImage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,6 +78,11 @@ class FragmentUser : Fragment() {
         binding.btnUpdate.setOnClickListener {
             val intent = Intent(requireActivity(), EditUserActivity::class.java)
             intent.putExtra("id_user", id_user)
+            startActivity(intent)
+        }
+
+        binding.btnImage.setOnClickListener {
+            val intent = Intent(requireActivity(), CameraActivity::class.java)
             startActivity(intent)
         }
 

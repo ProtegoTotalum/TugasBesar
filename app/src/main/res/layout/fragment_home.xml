@@ -48,6 +48,13 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_baseline_pie_chart"
             android:gravity="left" />
+
+        <ImageButton
+            android:id="@+id/btnAccel"
+            android:layout_width="22dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/accel"
+            android:gravity="left" />
     </LinearLayout>
 
     <com.airbnb.lottie.LottieAnimationView
